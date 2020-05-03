@@ -9,7 +9,7 @@ const Home = () => {
     const myRef = useRef(null)
     const executeScroll = () => scrollToRef(myRef)
 
-    const [ {logedIn, username} ] = useReduxState();
+    const [ {logedIn} ] = useReduxState();
 
     // useEffect(() => {
     //     const API_KEY = "0ae446b87f727fa6bdc4d19ec01dcb7d";
@@ -37,7 +37,7 @@ const Home = () => {
         <>
             { logedIn !== false ? 
                 <>
-
+                    You are logged in
                 </> : 
                 <>
                     <img width="100%" height="100%" style={{position: "fixed", left: "0", top: "50px", opacity: "30%"}} src={require('../../images/factory2.JPG')} />

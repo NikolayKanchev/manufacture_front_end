@@ -1,116 +1,3 @@
-// import React, {useState} from 'react';
-// import { Link } from 'react-router-dom';
-// import { useReduxState } from '../../utils/State';
-// import Select from '../selectMenu/Select';
-
-// import AppBar from '@material-ui/core/AppBar';
-// import Toolbar from '@material-ui/core/Toolbar';
-// import Typography from '@material-ui/core/Typography';
-// import InputBase from '@material-ui/core/InputBase';
-// import { fade, makeStyles } from '@material-ui/core/styles';
-// import SearchIcon from '@material-ui/icons/Search';
-// import { Button } from '@material-ui/core';
-
-
-// const useStyles = makeStyles(theme => ({
-//   root: {
-//     flexGrow: 1,
-//   },
-//   title: {
-//     flexGrow: 1,
-//     display: 'none',
-//     [theme.breakpoints.up('sm')]: {
-//       display: 'block',
-//     },
-//   },
-//   search: {
-//     position: 'relative',
-//     borderRadius: theme.shape.borderRadius,
-//     backgroundColor: fade(theme.palette.common.white, 0.15),
-//     '&:hover': {
-//       backgroundColor: fade(theme.palette.common.white, 0.25),
-//     },
-//     marginLeft: 0,
-//     width: '100%',
-//     [theme.breakpoints.up('sm')]: {
-//       marginLeft: theme.spacing(1),
-//       width: 'auto',
-//     },
-//   },
-//   searchIcon: {
-//     width: theme.spacing(7),
-//     height: '100%',
-//     position: 'absolute',
-//     pointerEvents: 'none',
-//     display: 'flex',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-//   inputRoot: {
-//     color: 'inherit',
-//   },
-//   link: {
-//     textDecoration: "none",
-//     color: "inherit"
-//   },
-//   inputInput: {
-//     padding: theme.spacing(1, 1, 1, 7),
-//     transition: theme.transitions.create('width'),
-//     width: '100%',
-//     [theme.breakpoints.up('sm')]: {
-//       width: 120,
-//       '&:focus': {
-//         width: 200,
-//       },
-//     },
-//   },
-// }));
-
-// export default function SearchAppBar(props) {
-//   let [ { logedIn, username }, dispatch ] = useReduxState();
-//   const [chosenusername, setChosenusername] = useState(username);
-
-//   const { appName } = props;
-//   const classes = useStyles();
-
-//   const handleChangeLogedIn = (e) => {
-//     if (e.key === 'Enter') {
-//       dispatch({ type: "updateUser", logedIn: e.target.value, username: chosenusername })
-//     }
-//   }
-
-//   return (
-//     <div className={classes.root}>
-//       <AppBar position="static">
-//         <Toolbar>
-//           <Button size="large" variant="outlined"><Link to="/" className={classes.link}>Today</Link></Button>
-//           <Button size="large" variant="outlined"><Link to="/week" className={classes.link}>7 Days</Link></Button>
-//           <Typography className={classes.title} variant="h6" noWrap>
-//             {/* **************************************************** */}
-//             { logedIn === "" ? appName : logedIn }
-//             {/* **************************************************** */}
-//           </Typography>
-//           <div className={classes.search}>
-//             <div className={classes.searchIcon}>
-//               <SearchIcon />
-//             </div>
-//             <InputBase
-//               placeholder="Search Cities…"
-//               classes={{
-//                 root: classes.inputRoot,
-//                 input: classes.inputInput,
-//               }}
-//               inputProps={{ 'aria-label': 'search' }}
-//               onKeyPress={handleChangeLogedIn}
-//             />
-//           </div>
-//           <Select chosenusername={chosenusername} optionsArr={["DK", "EN", "BG"]} title="username" selectusername={(c) => setChosenusername(c)}/>
-//         </Toolbar>
-//       </AppBar>
-//     </div>
-//   );
-// }
-
 import React from 'react';
 import history from '../../utils/History';
 import { useReduxState } from '../../utils/State';
@@ -130,12 +17,12 @@ import SearchIcon from '@material-ui/icons/Search';
 import ViewCarouselIcon from '@material-ui/icons/ViewCarousel';
 import CollectionsBookmarkIcon from '@material-ui/icons/CollectionsBookmark';
 import BusinessIcon from '@material-ui/icons/Business';
-
+import SettingsIcon from '@material-ui/icons/Settings';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import Button from '@material-ui/core/Button'
+import Button from '@material-ui/core/Button';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import MoreIcon from '@material-ui/icons/More';
+import MoreIcon from '@material-ui/icons/Menu';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -198,10 +85,17 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   sectionMobile: {
-    display: 'flex',
+    [theme.breakpoints.up('md')]: {
+      display: 'none'
+    },
+    position: "relative",
+    marginLeft: "23%",    
+  },
+  sectionMobileMenu: {
     [theme.breakpoints.up('md')]: {
       display: 'none',
     },
+    position: "absolute"
   },
 }));
 
@@ -209,7 +103,7 @@ export default function PrimarySearchAppBar() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const [ {logedIn, username, token, id} ] = useReduxState();
+  let [ { logedIn, username, token, id }, dispatch ] = useReduxState();
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -231,6 +125,16 @@ export default function PrimarySearchAppBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleProfileMenu = (newValue) => {
+    if (newValue === 1){
+      history.push("/myAccount");
+    }else if (newValue === 2){
+      dispatch({ type: "logoutUser", logedIn: false, username: "", token: "", id: "" });
+      history.push("/login");
+    }
+    handleMenuClose();
+  }
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -242,8 +146,20 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={() => handleProfileMenu(1)}>
+        <IconButton color="inherit">
+            <Badge color="secondary">
+              <SettingsIcon />
+            </Badge>
+          </IconButton>My Account
+      </MenuItem>
+      <MenuItem onClick={() => handleProfileMenu(2)}>
+        <IconButton color="inherit">
+            <Badge color="secondary">
+              <SettingsIcon />
+            </Badge>
+          </IconButton>LogOut
+      </MenuItem>
     </Menu>
   );
 
@@ -272,7 +188,6 @@ export default function PrimarySearchAppBar() {
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
-      // onClick={handleChangeMobileMenu}
     >
       <MenuItem onClick={() => handleChangeMobileMenu(0)}>
         <IconButton color="inherit">
@@ -310,6 +225,7 @@ export default function PrimarySearchAppBar() {
           </IconButton>Join as a Factory
       </MenuItem>
       
+      
       {/* <MenuItem>
         <IconButton aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="secondary">
@@ -326,7 +242,8 @@ export default function PrimarySearchAppBar() {
         </IconButton>
         <p>Notifications</p>
       </MenuItem> */}
-      <MenuItem onClick={handleProfileMenuOpen}>
+
+      {/* <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
@@ -336,7 +253,7 @@ export default function PrimarySearchAppBar() {
           <AccountCircle />
         </IconButton>
         <p>Profile</p>
-      </MenuItem>
+      </MenuItem> */}
     </Menu>
   );
 
@@ -373,10 +290,11 @@ export default function PrimarySearchAppBar() {
     <div className={classes.grow}>
       <AppBar position="fixed">
         <Toolbar>
-    
-          <Typography className={classes.title} variant="h6" noWrap>
-          <Button variant="outlined" onClick={onClick}> Logo </Button>
-          </Typography>
+          <div className={classes.sectionDesktop}>
+            <Typography className={classes.title} variant="h6" noWrap>
+            <Button variant="outlined" onClick={onClick}> Logo </Button>
+            </Typography>
+          </div>
 
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
@@ -401,19 +319,17 @@ export default function PrimarySearchAppBar() {
               <Badge badgeContent={17} color="secondary">
                 <NotificationsIcon />
               </Badge>
-            </IconButton>
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
             </IconButton> */}
+            { logedIn === true ? 
+              <>
+                
+              </>:
+              <>
+              </>  
+            }
+            
           </div>
-          <div className={classes.sectionMobile}>
+          <div className={classes.sectionMobileMenu}>
             <IconButton
               aria-label="show more"
               aria-controls={mobileMenuId}
@@ -425,9 +341,31 @@ export default function PrimarySearchAppBar() {
             </IconButton>
           </div>
 
+          <div className={classes.sectionMobile}>
+            <Typography className={classes.title} variant="h6" noWrap>
+              <Button variant="outlined" onClick={onClick}> Logo </Button>
+            </Typography>
+          </div>
+
           <div className={classes.grow} />
-          <Button variant="contained" color="secondary" onClick={() => history.push("/register")}>Sign Up</Button>
-          <Button color="inherit" onClick={() => history.push("/login")}>Login</Button>
+          { logedIn === false ?
+            <>
+              <Button variant="contained" color="secondary" onClick={() => history.push("/register")}>Sign Up</Button>
+              <Button color="inherit" onClick={() => history.push("/login")}>Login</Button>
+            </> :
+            <>
+              <IconButton
+                  edge="end"
+                  aria-label="account of current user"
+                  aria-controls={menuId}
+                  aria-haspopup="true"
+                  onClick={handleProfileMenuOpen}
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
+            </>
+          }
         </Toolbar>
       </AppBar>
       {renderMobileMenu}

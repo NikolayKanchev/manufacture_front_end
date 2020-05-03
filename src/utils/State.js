@@ -15,6 +15,12 @@ export const reducer = (state, action) => {
             state.token = action.token;
             state.id = action.id;
             return {...state};
+        case "logoutUser":
+            state.logedIn = action.logedIn;           
+            state.username = action.username;
+            state.token = action.token;
+            state.id = action.id;
+            return {...state};
         default:
             return initialState;
     }
