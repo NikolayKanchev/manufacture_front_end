@@ -1,10 +1,11 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import history from '../../utils/History';
 
 import Message from '../../components/message/Message';
 import { loginRequest } from '../../utils/FetchData';
 import { validatePass, validateEmail } from '../../utils/Validators';
+import { useReduxState } from '../../utils/State';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -25,6 +26,7 @@ const LoginPage = (props) => {
   const [errPass, setErrPass] = useState(false);
   const [errEmail, setErrEmail] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  let [ { logedIn, username, token, id }, dispatch ] = useReduxState();
 
   const displayError = (message) => {
     setErrorMessage(message)
@@ -42,9 +44,8 @@ const LoginPage = (props) => {
       loginRequest(email, password)
       .then(res => {
         if (res.status === 200){
-          const { userId, displayName, token } = res.data;
+          dispatch({ type: "updateUser", logedIn: true, username: res.data.displayName, token: res.data.token, id: res.data.userId });
           history.goBack();
-          props.setUserState({ id: userId, displayName: displayName, token: token })
         }else{
           displayError("Something went wrong! Try again!")
         }

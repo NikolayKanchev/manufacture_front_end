@@ -2,7 +2,9 @@ import React, { useReducer, useContext } from 'react';
 
 export const initialState = {
     logedIn: false,
-    username: "gggggggggg"
+    username: "",
+    token: "",
+    id: ""
 }
   
 export const reducer = (state, action) => {
@@ -10,9 +12,11 @@ export const reducer = (state, action) => {
         case "updateUser": 
             state.logedIn = action.logedIn;           
             state.username = action.username;
+            state.token = action.token;
+            state.id = action.id;
             return {...state};
         default:
-        return initialState;
+            return initialState;
     }
 }
   

@@ -112,6 +112,9 @@
 // }
 
 import React from 'react';
+import history from '../../utils/History';
+import { useReduxState } from '../../utils/State';
+
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -122,11 +125,17 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
+import HomeIcon from '@material-ui/icons/Home';
+import SearchIcon from '@material-ui/icons/Search';
+import ViewCarouselIcon from '@material-ui/icons/ViewCarousel';
+import CollectionsBookmarkIcon from '@material-ui/icons/CollectionsBookmark';
+import BusinessIcon from '@material-ui/icons/Business';
+
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import Button from '@material-ui/core/Button'
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import history from '../../utils/History';
+import MoreIcon from '@material-ui/icons/More';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -200,6 +209,7 @@ export default function PrimarySearchAppBar() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [ {logedIn, username, token, id} ] = useReduxState();
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -237,6 +247,21 @@ export default function PrimarySearchAppBar() {
     </Menu>
   );
 
+  const handleChangeMobileMenu = (newValue) => {
+    if (newValue === 0){
+      history.push("/");
+      }else if (newValue === 1){
+      history.push("/find");
+    }else if (newValue === 2){
+      history.push("/projects");
+    }else if (newValue === 3){
+      history.push("/plans");
+    }else if (newValue === 4){
+      history.push("/joinAsFactory");
+    }
+    handleMobileMenuClose();
+  }
+
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
     <Menu
@@ -247,8 +272,45 @@ export default function PrimarySearchAppBar() {
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
+      // onClick={handleChangeMobileMenu}
     >
-      <MenuItem>
+      <MenuItem onClick={() => handleChangeMobileMenu(0)}>
+        <IconButton color="inherit">
+            <Badge color="secondary">
+              <HomeIcon />
+            </Badge>
+          </IconButton> Home
+      </MenuItem>
+      <MenuItem onClick={() => handleChangeMobileMenu(1)}>
+        <IconButton color="inherit">
+            <Badge color="secondary">
+              <SearchIcon />
+            </Badge>
+          </IconButton>Find Factory
+      </MenuItem>
+      <MenuItem onClick={() => handleChangeMobileMenu(2)}>
+        <IconButton color="inherit">
+            <Badge color="secondary">
+              <CollectionsBookmarkIcon />
+            </Badge>
+          </IconButton>Your Projects
+      </MenuItem>
+      <MenuItem onClick={() => handleChangeMobileMenu(3)}>
+        <IconButton color="inherit">
+            <Badge color="secondary">
+              <ViewCarouselIcon />
+            </Badge>
+          </IconButton>Plans
+      </MenuItem>
+      <MenuItem onClick={() => handleChangeMobileMenu(4)}>
+        <IconButton color="inherit">
+            <Badge color="secondary">
+              <BusinessIcon />
+            </Badge>
+          </IconButton>Join as a Factory
+      </MenuItem>
+      
+      {/* <MenuItem>
         <IconButton aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="secondary">
             <MailIcon />
@@ -263,7 +325,7 @@ export default function PrimarySearchAppBar() {
           </Badge>
         </IconButton>
         <p>Notifications</p>
-      </MenuItem>
+      </MenuItem> */}
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           aria-label="account of current user"
@@ -316,9 +378,21 @@ export default function PrimarySearchAppBar() {
           <Button variant="outlined" onClick={onClick}> Logo </Button>
           </Typography>
 
-          {/* <div className={classes.grow} />
+          <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 4 new mails" color="inherit">
+            
+          {/* <div className={classes.grow} /> */}
+            <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+              <Tab label="Home" {...a11yProps(0)}/>
+              <Tab label="Find Factory" {...a11yProps(1)}/>
+              <Tab label="Your Projects" {...a11yProps(2)}/>
+
+              <Tab label="Plans" {...a11yProps(3)}/>
+              <Tab label="Join as a Factory" {...a11yProps(4)} />
+            </Tabs>
+
+
+            {/* <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <MailIcon />
               </Badge>
@@ -337,7 +411,7 @@ export default function PrimarySearchAppBar() {
               color="inherit"
             >
               <AccountCircle />
-            </IconButton>
+            </IconButton> */}
           </div>
           <div className={classes.sectionMobile}>
             <IconButton
@@ -349,17 +423,7 @@ export default function PrimarySearchAppBar() {
             >
               <MoreIcon />
             </IconButton>
-          </div> */}
-
-          <div className={classes.grow} />
-          <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-            <Tab label="Home" {...a11yProps(0)}/>
-            <Tab label="Find Factory" {...a11yProps(1)}/>
-            <Tab label="Your Projects" {...a11yProps(2)}/>
-
-            <Tab label="Plans" {...a11yProps(3)}/>
-            <Tab label="Join as a Factory" {...a11yProps(4)} />
-          </Tabs>
+          </div>
 
           <div className={classes.grow} />
           <Button variant="contained" color="secondary" onClick={() => history.push("/register")}>Sign Up</Button>

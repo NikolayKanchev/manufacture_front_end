@@ -20,8 +20,6 @@ import UpdatePass from './containers/resetPass/UpdatePass';
 
 import history from './utils/History';
 
-
-
 import { 
   initialState, 
   reducer, 
