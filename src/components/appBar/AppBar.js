@@ -11,14 +11,15 @@ import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
+// import MailIcon from '@material-ui/icons/Mail';
 import HomeIcon from '@material-ui/icons/Home';
 import SearchIcon from '@material-ui/icons/Search';
 import ViewCarouselIcon from '@material-ui/icons/ViewCarousel';
 import CollectionsBookmarkIcon from '@material-ui/icons/CollectionsBookmark';
 import BusinessIcon from '@material-ui/icons/Business';
 import SettingsIcon from '@material-ui/icons/Settings';
-import NotificationsIcon from '@material-ui/icons/Notifications';
+import ExitIcon from '@material-ui/icons/ExitToApp';
+// import NotificationsIcon from '@material-ui/icons/Notifications';
 import Button from '@material-ui/core/Button';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -89,7 +90,7 @@ const useStyles = makeStyles((theme) => ({
       display: 'none'
     },
     position: "relative",
-    marginLeft: "23%",    
+    marginLeft: "15%",    
   },
   sectionMobileMenu: {
     [theme.breakpoints.up('md')]: {
@@ -103,7 +104,7 @@ export default function PrimarySearchAppBar() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  let [ { logedIn, username, token, id }, dispatch ] = useReduxState();
+  let [ { logedIn }, dispatch ] = useReduxState();
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -156,7 +157,7 @@ export default function PrimarySearchAppBar() {
       <MenuItem onClick={() => handleProfileMenu(2)}>
         <IconButton color="inherit">
             <Badge color="secondary">
-              <SettingsIcon />
+              <ExitIcon />
             </Badge>
           </IconButton>LogOut
       </MenuItem>

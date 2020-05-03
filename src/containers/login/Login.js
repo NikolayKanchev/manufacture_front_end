@@ -26,7 +26,7 @@ const LoginPage = (props) => {
   const [errPass, setErrPass] = useState(false);
   const [errEmail, setErrEmail] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  let [ { logedIn, username, token, id }, dispatch ] = useReduxState();
+  let [ , dispatch ] = useReduxState();
 
   const displayError = (message) => {
     setErrorMessage(message)

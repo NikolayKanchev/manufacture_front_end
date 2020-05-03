@@ -20,7 +20,7 @@ const ResetPass = (props) => {
   const [errPass, setErrPass] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const [ {logedIn, username} ] = useReduxState();
+  const [ {logedIn} ] = useReduxState();
 
   useEffect(() => {
     if (logedIn !== false){

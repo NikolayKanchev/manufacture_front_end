@@ -4,7 +4,11 @@ import {
   Route, 
   Switch, 
 } from 'react-router-dom';
-
+import { 
+  initialState, 
+  reducer, 
+  StateProvider,
+} from './utils/State';
 import AppBar from './components/appBar/AppBar';
 import Copyright from './components/copyRight/Copyright';
 
@@ -17,16 +21,9 @@ import Register from './containers/register/Register';
 import JoinAsFactory from './containers/joinAsFactory/JoinAsFactory';
 import ResetPass from './containers/resetPass/ResetPass';
 import UpdatePass from './containers/resetPass/UpdatePass';
+import MyAccount from './containers/myAccount/MyAccount';
 
 import history from './utils/History';
-
-import { 
-  initialState, 
-  reducer, 
-  StateProvider 
-} from './utils/State';
-
-// import { Container, Box } from '@material-ui/core';
 import './App.css';
 
 
@@ -47,19 +44,20 @@ class App extends Component {
         <div className="App" style={{minHeight: "535px"}}>
           <Router history={history}>
             <AppBar appName={appName}/>
-            <Switch>
-              <div style={{marginTop: "100px"}}>
-                <Route path="/" component={Home} exact/>
-                <Route path="/find" component={Find} exact/>
-                <Route path="/projects" component={Projects} exact/>
-                <Route path="/plans" component={Plans} exact/>
-                <Route path="/joinAsFactory" component={JoinAsFactory} exact/>
-                <Route path="/login" component={Login} exact/>
-                <Route path="/register" component={Register} exact/>
-                <Route path="/reset-pass" component={ResetPass} exact/>
-                <Route path="/updatePass/:token" component={UpdatePass} exact/>
-              </div>
-            </Switch>
+            <div style={{marginTop: "100px"}}>
+              <Switch>
+                  <Route path="/" component={Home} exact/>
+                  <Route path="/find" component={Find} exact/>
+                  <Route path="/projects" component={Projects} exact/>
+                  <Route path="/plans" component={Plans} exact/>
+                  <Route path="/joinAsFactory" component={JoinAsFactory} exact/>
+                  <Route path="/login" component={Login} exact/>
+                  <Route path="/register" component={Register} exact/>
+                  <Route path="/reset-pass" component={ResetPass} exact/>
+                  <Route path="/updatePass/:token" component={UpdatePass} exact/>
+                  <Route path="/myAccount" component={MyAccount} exact/>
+              </Switch>
+            </div>
           </Router>
         </div>
 

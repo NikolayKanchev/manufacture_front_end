@@ -1,4 +1,5 @@
-import React, {useEffect, useState, useRef} from 'react';
+// import React, {useEffect, useState, useRef} from 'react';
+import React, {useRef} from 'react';
 import { useReduxState } from '../../utils/State';
 import Button from '@material-ui/core/Button';
 import history from '../../utils/History';
@@ -40,7 +41,7 @@ const Home = () => {
                     You are logged in
                 </> : 
                 <>
-                    <img width="100%" height="100%" style={{position: "fixed", left: "0", top: "50px", opacity: "30%"}} src={require('../../images/factory2.JPG')} />
+                    <img alt="" width="100%" height="100%" style={{position: "fixed", left: "0", top: "50px", opacity: "30%"}} src={require('../../images/factory2.JPG')} />
                     <div style={{position: "fixed", left: "0", top: "50px", backgroundColor: "#3949ab", width: "100%", height:"100%", opacity: "20%"}}></div>
                     <div style={{marginTop: "200px"}}></div>
                     <h1>Find a Manufacturer</h1>
