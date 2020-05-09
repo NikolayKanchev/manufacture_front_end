@@ -10,7 +10,7 @@ import {
   StateProvider,
 } from './utils/State';
 import AppBar from './components/appBar/AppBar';
-import Copyright from './components/copyRight/Copyright';
+import Footer from './components/footer/Footer';
 
 import Home from './containers/home/Home';
 import Find from './containers/find/Find';
@@ -41,30 +41,32 @@ class App extends Component {
     return (
       <>
       <StateProvider initialState={initialState} reducer={reducer}>
-        <div className="App" style={{minHeight: "535px"}}>
-          <Router history={history}>
-            <AppBar appName={appName}/>
-            <div style={{marginTop: "100px"}}>
-              <Switch>
-                  <Route path="/" component={Home} exact/>
-                  <Route path="/find" component={Find} exact/>
-                  <Route path="/projects" component={Projects} exact/>
-                  <Route path="/plans" component={Plans} exact/>
-                  <Route path="/joinAsFactory" component={JoinAsFactory} exact/>
-                  <Route path="/login" component={Login} exact/>
-                  <Route path="/register" component={Register} exact/>
-                  <Route path="/reset-pass" component={ResetPass} exact/>
-                  <Route path="/updatePass/:token" component={UpdatePass} exact/>
-                  <Route path="/myAccount" component={MyAccount} exact/>
-              </Switch>
-            </div>
-          </Router>
+        <div className="App" style={{backgroundColor: "#fafafa"}}>
+          <div className="App" style={{minHeight: "575px"}}>
+            <Router history={history}>
+              <AppBar appName={appName}/>
+              <div style={{marginTop: "60px", paddingTop: "20px"}}>
+                <Switch>
+                    <Route path="/" component={Home} exact/>
+                    <Route path="/find" component={Find} exact/>
+                    <Route path="/projects" component={Projects} exact/>
+                    <Route path="/plans" component={Plans} exact/>
+                    <Route path="/joinAsFactory" component={JoinAsFactory} exact/>
+                    <Route path="/login" component={Login} exact/>
+                    <Route path="/register" component={Register} exact/>
+                    <Route path="/reset-pass" component={ResetPass} exact/>
+                    <Route path="/updatePass/:token" component={UpdatePass} exact/>
+                    <Route path="/myAccount" component={MyAccount} exact/>
+                </Switch>
+              </div>
+            </Router>
+          </div>
+          <Footer company={appName}/>
         </div>
 
-        <div style={{backgroundColor: "#3949ab", minHeight: "300px", zIndex: "auto"}}>
+        {/* <div style={{backgroundColor: "#3949ab", minHeight: "300px", zIndex: "auto"}}> */}
           
-          <Copyright company={appName}/>
-        </div>
+        {/* </div> */}
 
       </StateProvider>
       </>

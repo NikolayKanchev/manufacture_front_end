@@ -57,7 +57,7 @@ const displayError = (message) => {
         registerRequest(userInfo)
         .then(res => {          
           if (res.data.message === "Your registration was successful!"){
-            history.push('/');
+            history.push('/login');
           }else{
             console.log(res);
             displayError("Something went wrong! Try again!")

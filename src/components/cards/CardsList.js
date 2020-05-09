@@ -1,27 +1,40 @@
 import React from 'react';
 import Card from './Card';
-import { fetchCards } from '../../utils/FetchData';
+import CardSection from './CardSection';
 import './Card.css';
 
 
-const CardsList = () => {
-
-    const cards = fetchCards();
+const CardsList = (props) => {
+        
+    const {cards, type}= props;
 
     return (
         <>
-            {cards.map( card => <Card key={card.id} card={card} /> )}
-            
-            { cards.length > 0 ? (
+            {type === "flex" ? 
                 <>
-                    <div className="hidden">
-                        <Card card={cards[0]}/>
-                    </div>
-                    <div className="hidden">
-                        <Card card={cards[0]}/>
-                    </div>
+                    {cards.map( card => <Card key={card.id} card={card} /> )}
+                    
+                    { cards.length > 0 ? (
+                        <>
+                            <div className="hidden">
+                                <Card card={cards[0]}/>
+                            </div>
+                            <div className="hidden">
+                                <Card card={cards[0]}/>
+                            </div>
+                        </>
+                    ): null }
+                </>:
+                <>
+                    {cards.map( card => 
+                        <>
+                            <div style={{ display:"flex", justifyContent:"center"}}>
+                                <CardSection key={card.id} card={card} />
+                            </div>
+                        </>
+                     )}
                 </>
-            ): null }
+            }
         </>
     )
 }

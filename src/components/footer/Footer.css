@@ -1,0 +1,41 @@
+.main-container{
+    background-color: #3949ab;
+    min-height: 200px;
+    z-index: auto;
+    color: aliceblue;
+    text-align: center;
+}
+
+.flex-container {
+    padding-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.sub-container {
+    margin-left: 50px;
+    min-width: 200px;
+    display: flex;
+    justify-content: center;
+}
+
+.content {
+    min-width: 200px;
+}
+
+.title {
+    color: #212121;
+}
+
+@media(max-width: 1317px){
+    .flex-container {
+        display: block;
+        min-height: 200px;
+    }
+    .sub-container{
+        margin-bottom: 20px;
+        margin-left: auto;
+    }
+}

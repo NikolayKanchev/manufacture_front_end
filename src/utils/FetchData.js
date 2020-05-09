@@ -41,8 +41,35 @@ const cards = [
     },
 ];
 
-export const fetchCards = () => {
+const homeInfoCards = [
+    {
+        id: "1",
+        title: "The best title",
+        text: "Developing an idea for a product is meaningless if you can't adequately produce it. Properly manufacturing your product requires an understanding of the design, materials and budget. For most businesses trying to turn ideas and prototypes into a tangible product, you'll need the    help of a manufacturing facility, especially if you're trying to produce in bulk. Here's what you need to consider as you search for a factory to produce your product. Before you hire a factory and start producing your product, you need to take care of a few beginning steps.",
+    },
+    {
+        id: "2",
+        title: "The best title",
+        text: "Developing an idea for a product is meaningless if you can't adequately produce it. Properly manufacturing your product requires an understanding of the design, materials and budget. For most businesses trying to turn ideas and prototypes into a tangible product, you'll need the    help of a manufacturing facility, especially if you're trying to produce in bulk. Here's what you need to consider as you search for a factory to produce your product. Before you hire a factory and start producing your product, you need to take care of a few beginning steps.",
+    },
+    {
+        id: "3",
+        title: "The best title",
+        text: "Developing an idea for a product is meaningless if you can't adequately produce it. Properly manufacturing your product requires an understanding of the design, materials and budget. For most businesses trying to turn ideas and prototypes into a tangible product, you'll need the    help of a manufacturing facility, especially if you're trying to produce in bulk. Here's what you need to consider as you search for a factory to produce your product. Before you hire a factory and start producing your product, you need to take care of a few beginning steps.",
+    },
+    {
+        id: "4",
+        title: "The best title",
+        text: "Developing an idea for a product is meaningless if you can't adequately produce it. Properly manufacturing your product requires an understanding of the design, materials and budget. For most businesses trying to turn ideas and prototypes into a tangible product, you'll need the    help of a manufacturing facility, especially if you're trying to produce in bulk. Here's what you need to consider as you search for a factory to produce your product. Before you hire a factory and start producing your product, you need to take care of a few beginning steps.",
+    }
+]
+
+export const fetchPlansCards = () => {
     return cards;
+}
+
+export const fetchHomeInfoCards = () => {
+    return homeInfoCards;
 }
 
 const authorization = (token) => {

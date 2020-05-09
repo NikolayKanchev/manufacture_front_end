@@ -1,0 +1,15 @@
+.details{
+    margin-top: 190px;
+}
+
+@media(min-width: 862px){
+    .details{
+        margin-top: 190px;
+    }
+}
+
+@media(max-width: 861px){
+    .details{
+        margin-top: 150px;
+    }
+}

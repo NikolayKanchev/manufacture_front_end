@@ -86,7 +86,7 @@ const LoginPage = (props) => {
   <>
   <Container component="main" maxWidth="xs">
     <div className="paper">
-      <Avatar className="avatar" style={{ backgroundColor: "#e91e63", marginLeft: "45%", marginTop: "100px"}}>
+      <Avatar className="avatar" style={{ backgroundColor: "#e91e63", marginLeft: "45%" }}>
         <LockOutlinedIcon />
       </Avatar>
       <Typography component="h1" variant="h5">
