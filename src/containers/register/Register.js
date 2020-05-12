@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import Message from '../../components/message/Message';
@@ -29,6 +29,10 @@ const [errLN, setErrLN] = useState(false);
 const [errEmail, setErrEmail] = useState(false);
 const [errPass, setErrPass] = useState(false);
 const [errorMessage, setErrorMessage] = useState("");
+
+useEffect(() => {
+  window.scrollTo(0, 0);
+});
 
 const displayError = (message) => {
     setErrorMessage(message);

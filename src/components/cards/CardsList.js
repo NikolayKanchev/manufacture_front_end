@@ -27,11 +27,9 @@ const CardsList = (props) => {
                 </>:
                 <>
                     {cards.map( card => 
-                        <>
-                            <div style={{ display:"flex", justifyContent:"center"}}>
-                                <CardSection key={card.id} card={card} />
-                            </div>
-                        </>
+                        <div key={card.id} style={{ display:"flex", justifyContent:"center"}}>
+                            <CardSection card={card} />
+                        </div>
                      )}
                 </>
             }

@@ -11,6 +11,42 @@
     visibility: hidden;
 }
 
+.sub-cards{
+    display: flex;
+    justify-content: space-around;
+}
+
+.sub-card{
+    margin-bottom: 20px;
+    max-width: 300px;
+}
+
+.image{
+    max-width: 200px;
+}
+
+.text{
+    min-height: 100px;
+}
+
+.card-title{
+    font-weight: 600;
+    font-size: xx-large;
+    color: #2a3eb1;
+}
+
+.sub-card-title{
+    color: #f50057;
+    font-size: x-large;
+    font-weight: 600;
+}
+
+.number{
+    max-width: 2px;
+    border-radius: 50%;
+    border: 2px solid #f50057;
+}
+
 @media(min-width: 1317px){
     .hidden {
         display: none;
@@ -20,5 +56,12 @@
 @media(max-width: 991px){
     .hidden {
         display: none;
+    }
+    .sub-cards{
+        display: block;
+        padding: 10%;
+    }
+    .sub-card{
+        padding: 5%;
     }
 }

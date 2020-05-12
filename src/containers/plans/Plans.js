@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect} from 'react';
 import CardsList from '../../components/cards/CardsList';
 import Typography from '@material-ui/core/Typography';
 import { fetchPlansCards } from '../../utils/FetchData';
@@ -6,6 +6,11 @@ import './Plans.css';
 
 const Plans = () => {
     const cards = fetchPlansCards();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    });    
+
     return (
         <>
             <div className="title">

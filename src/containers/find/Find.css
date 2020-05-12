@@ -1,0 +1,4 @@
+.search-containers{
+    display: flex;
+    justify-content: space-around;
+}

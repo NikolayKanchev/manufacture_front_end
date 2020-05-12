@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import history from '../../utils/History';
 
@@ -27,6 +27,10 @@ const LoginPage = (props) => {
   const [errEmail, setErrEmail] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   let [ , dispatch ] = useReduxState();
+
+  useEffect(() => {
+      window.scrollTo(0, 0);
+  });
 
   const displayError = (message) => {
     setErrorMessage(message)

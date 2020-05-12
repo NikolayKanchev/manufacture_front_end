@@ -307,7 +307,7 @@ export default function PrimarySearchAppBar() {
               <Tab label="Your Projects" {...a11yProps(2)}/>
 
               <Tab label="Plans" {...a11yProps(3)}/>
-              <Tab label="Join as a Factory" {...a11yProps(4)} />
+              <Tab label="Join as Manufacturer" {...a11yProps(4)} />
             </Tabs>
 
 
