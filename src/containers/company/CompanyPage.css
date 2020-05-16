@@ -1,0 +1,15 @@
+.flex-company{
+    display: flex;
+    justify-content: center;
+}
+
+.card-company{
+    width: 80%;
+    min-height: 400px;
+}
+
+@media(max-width: 861px){
+    .card{
+        width: 95%;
+    }
+}

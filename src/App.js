@@ -22,6 +22,7 @@ import JoinAsFactory from './containers/joinAsFactory/JoinAsFactory';
 import ResetPass from './containers/resetPass/ResetPass';
 import UpdatePass from './containers/resetPass/UpdatePass';
 import MyAccount from './containers/myAccount/MyAccount';
+import CompanyPage from './containers/company/CompanyPage';
 
 import history from './utils/History';
 import './App.css';
@@ -57,16 +58,13 @@ class App extends Component {
                     <Route path="/reset-pass" component={ResetPass} exact/>
                     <Route path="/updatePass/:token" component={UpdatePass} exact/>
                     <Route path="/myAccount" component={MyAccount} exact/>
+                    <Route path="/company/:id" component={CompanyPage} exact/>
                 </Switch>
               </div>
             </Router>
           </div>
           <Footer company={appName}/>
         </div>
-
-        {/* <div style={{backgroundColor: "#3949ab", minHeight: "300px", zIndex: "auto"}}> */}
-          
-        {/* </div> */}
 
       </StateProvider>
       </>

@@ -570,6 +570,10 @@ const searchResults = [
 
 ]
 
+export const getCompany = (id) => {
+    return searchResults[id];
+}
+
 export const fetchSearchResults = (searched) => {
     // const {country, category, subCategory, filter} = searched;
     return searchResults;

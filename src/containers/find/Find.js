@@ -6,6 +6,7 @@ import MoreIcon from '@material-ui/icons/ArrowBackIosOutlined';
 import LessIcon from '@material-ui/icons/ArrowForwardIosOutlined';
 import './Find.css';
 import { fetchCategories, fetchSubCategories, fetchSearchResults } from '../../utils/FetchData';
+import history from '../../utils/History';
 import { Card } from '@material-ui/core';
 
 const filters = [
@@ -141,12 +142,17 @@ const Find = () => {
                                             </div>
                                         </div>
                                     </div>
+                                    <div className="search-less"><Button variant="outlined" color="primary" onClick={() => history.push("/company/" + result.id)}>See Details</Button></div>
                                 </Card>
                             </div>
                         </div>
                     )}
                     
-                </div>: null
+                </div>: 
+                <>
+                    <img alt="" height="100px" style={{left: "0", marginTop: "55px", color: "#f50057"}} src={require('../../images/up-arrow.png')} />
+                    <div className="flex-search-for-product"><div className="search-for-product">Search for manufacturer by choosing a product!</div></div>
+                </>
             }
         </>
     )
