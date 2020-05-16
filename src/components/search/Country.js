@@ -39,7 +39,7 @@ export default function CountrySelect(props) {
   return (
     <Autocomplete
       id="country-select-demo"
-      style={{ width: 300 }}
+      style={{ width: 230, marginTop: "3px" }}
       options={countries}
       classes={{
         option: classes.option,
@@ -57,7 +57,10 @@ export default function CountrySelect(props) {
         <TextField
           {...params}
           label="Choose a country"
-          variant="outlined"
+          variant="standard"
+          size="small"
+          // required={true}
+          // error={true}
           inputProps={{
             ...params.inputProps,
             autoComplete: 'new-password', // disable autocomplete and autofill

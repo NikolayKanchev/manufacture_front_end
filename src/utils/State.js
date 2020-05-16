@@ -4,7 +4,8 @@ export const initialState = {
     logedIn: false,
     username: "",
     token: "",
-    id: ""
+    id: "",
+    categorySelected: false
 }
   
 export const reducer = (state, action) => {
@@ -20,6 +21,13 @@ export const reducer = (state, action) => {
             state.username = action.username;
             state.token = action.token;
             state.id = action.id;
+            return {...state};
+        case "updateSelectedCategory":
+            state.logedIn = action.logedIn;           
+            state.username = action.username;
+            state.token = action.token;
+            state.id = action.id;
+            state.categorySelected = action.categorySelected;
             return {...state};
         default:
             return initialState;

@@ -1,182 +1,90 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import CountrySearch from '../../components/search/Country';
 import CategorySearch from '../../components/search/Category';
+import Button from '@material-ui/core/Button';
 import './Find.css';
+import { fetchCategories, fetchSubCategories, fetchSearchResults } from '../../utils/FetchData';
+import { Card } from '@material-ui/core';
 
-const categories = [
-    { title: 'Food and Baverage'},
-    { title: 'Agriculture'},
-    { title: 'Apparel'},
-    { title: 'Accessories'},
-    { title: 'Leather Product'},
-    { title: 'Jewelry, Eyewear, Wach'},
-    { title: 'Auto, Transport, Accessories'},
-    { title: 'Shoes, Bags & Accessories'},
-    { title: 'Electronics'},
-    { title: 'Home Appliance'},
-
-];
-
-const subCategories = {
-    "Food and Baverage": [
-        { title: 'Alcoholic Baverage'},
-        { title: 'Non-Alcoholic Baverage'},
-        { title: 'Baked Food'},
-        { title: 'Canned Food'},
-        { title: 'Confectionery'},
-        { title: 'Ingredients'},
-        { title: 'Instant Food'},
-        { title: 'Baby Food'},
-        { title: 'Been Products'},
-        { title: 'Coffee'},
-        { title: 'Egg & Egg Products'},
-        { title: 'Fruit Products'},
-        { title: 'Honey & Honey Products'},
-        { title: 'Meat Products'},
-        { title: 'Seafood'},
-        { title: 'Snack Food'},
-        { title: 'Other Food & Baverage'}
-    ],
-    "Agriculture": [
-        { title: 'Beens'},
-        { title: 'Coffee'},
-        { title: 'Fruit'},
-        { title: 'Cigars & Cigarettes'},
-        { title: 'Animal Products'},
-        { title: 'Cocoa Beens'},
-        { title: 'Farm Machinery & Equipment'},
-        { title: 'Ornamental Plants'},
-        { title: 'Oil'},
-        { title: 'Vegetables'}
-    ],
-    "Apparel": [
-        { title: 'Apparel Stock'},
-        { title: "Men's Clothing"},
-        { title: "Women's Clothing"},
-        { title: "Girl's Clothing"},
-        { title: "Boy's Clothing"},
-        { title: "Mannequins"},
-        { title: "Sportswear"},
-        { title: "Wedding Apparel"},
-        { title: "Stage & Dance Wear"},
-        { title: "Maternity Clothing"},
-        { title: "Infant & Toddlers Clothing"},
-        { title: "Other Apparel"},
-    ],
-    "Accessories": [
-        { title: 'Belts'},
-        { title: 'Belt Accessories'},
-        { title: 'Gloves'},
-        { title: 'Hats & Caps'},
-        { title: 'Scarf, Hat & Glove Sets'},
-        { title: "Wedding Accessories"},
-        { title: "Leather Accessories"},
-        { title: "Scarves & Shawls"},
-    ],
-    "Leather Product": [
-        { title: 'Genuine Leather Products'},
-        { title: 'Leather Accessories'},
-        { title: 'Leather Jackets'},
-        { title: 'Leather Gloves'},
-        { title: 'Leather Bags'},
-        { title: 'Leather Shoes'},
-    ],
-    "Jewelry, Eyewear, Wach": [
-        { title: 'Jewelry'},
-        { title: 'Glasses'},
-        { title: 'Sunglases'},
-        { title: 'Glasess Frames'},
-        { title: 'Necklaces'},
-        { title: 'Wathches'},
-        { title: 'Bracelets & Bangles'},
-        { title: 'Jewelry Boxes'},
-        { title: 'Jewelry Tools & Equipment'},
-        { title: 'Other'},
-    ],
-    "Auto, Transport, Accessories": [
-        { title: 'Car Fabrics'},
-        { title: 'Trailers'},
-        { title: 'Truck Parts & Accessories'},
-        { title: 'Motorcycles & Scooters'},
-        { title: 'Emergency Vehicles'},
-        { title: 'Trains'},
-        { title: 'Marine Parts & Accessories'},
-        { title: 'Bus'},
-        { title: 'ATVs & UTVs'},
-        { title: 'Containers'},
-    ],
-    "Shoes, Bags & Accessories": [
-        { title: 'Bags'},
-        { title: 'Bags, Parts, Materials'},
-        { title: 'Luggage & Travel Bags'},
-        { title: 'Camera Bags'},
-        { title: 'Sport & Leisure Bags'},
-        { title: 'Cosmetic Cases & Bags'},
-        { title: 'Wallets'},
-        { title: 'Business Cases & Bags'},
-        { title: 'Baby Shoes'},
-        { title: 'Dance Shoes'},
-        { title: "Men's Shoes"},
-        { title: "Women's Shoes"},
-        { title: "Girl's Shoes"},
-        { title: "Boy's Shoes"},
-        { title: "Repering Equipment"},
-        { title: "Shoe Parts & Accessories"},
-        { title: "Shoe Materials"},
-
-    ],
-    "Electronics": [
-        { title: 'Computer Hardware & Software'},
-        { title: 'Parts & Accessories'},
-        { title: 'Mobile Phones & Accessories'},
-        { title: 'Portable Video, Audio & Accessories'},
-        { title: 'Electronic Cigarettes'},
-        { title: 'Camera, Photo & Accessories'},
-        { title: 'Video Game & Accessories'},
-        { title: 'TV & Radio Accessories'},
-        { title: 'Cables'},
-    ],
-    "Home Appliance": [
-        { title: 'Fans'},
-        { title: 'Dryers'},
-        { title: 'Coffee Makers'},
-        { title: 'Home Appliance Parts'},
-        { title: 'Citchen Appliances'},
-        { title: 'Air Conditioners'},
-        { title: 'Coocking Appliances'},
-    ],
-    undefined: [
-        { title: 'Choose a category first!'},
-    ]
-}
+const filters = [
+    { title: 'Best Match'},
+    { title: 'Highest Rated'},
+    { title: 'Min Order'},
+    { title: 'Alphabetical'},
+]
 
 const Find = () => {
-    const [country, setCountry] = useState();
-    const [category, setCategory] = useState();
-    const [subCategory, setSubCategory] = useState();
+    const categories = fetchCategories();
+    const [subCategories, setSubCategories] = useState();
+
+    const country = useRef();
+    const category = useRef();
+    const subCategory = useRef();
+    const filter = useRef();
+    const [searchResults, setSearchResults] = useState();
 
     useEffect(() => {
         window.scrollTo(0, 0);
     });
 
     const handleSelectCountry = (selected) => {
-        setCountry(selected);
+        country.current = selected;
     }
 
-    const handleSelectCategory = (selected) => {
-        setCategory(selected);
+    const handleSelectCategory = async (selected) => {
+        const data = await fetchSubCategories(selected);
+        setSubCategories(data);
+        category.current = selected;
     }
 
     const handleSelectSubCategory = (selected) => {
-        setSubCategory(selected);
+        subCategory.current = selected;
+    }
+
+    const handleSelectFilter = (selected) => {
+        filter.current = selected;
+    }
+
+    const handleSearch = async () => {
+        const searched = {
+            country: country.current,
+            category: category.current,
+            subCategory: subCategory.current,
+            filter: filter.current
+        }
+        setSearchResults(await fetchSearchResults(searched))
+        // console.log(country.current + ", " + category.current + ", " + subCategory.current + ", " + filter.current);
     }
 
     return(
-        <div className="search-containers">
-            <CountrySearch handleSelectCountry={handleSelectCountry} />
-            <CategorySearch handleSelectCategory={handleSelectCategory} categories={categories} label="Category"/>
-            <CategorySearch handleSelectCategory={handleSelectSubCategory} categories={subCategories[category]} label="Sub Category"/>
-        </div>
+        <>
+            <div className="search-containers">
+                <div className="search-elements">
+                    <CountrySearch handleSelectCountry={handleSelectCountry} />
+                    <CategorySearch handleSelected={handleSelectCategory} categories={categories} label="Category"/>
+                    <CategorySearch handleSelected={handleSelectSubCategory} categories={subCategories} label="Sub Category" />
+                    <CategorySearch handleSelected={handleSelectFilter} categories={filters} label="Filter"/>
+                    <div className="searchBtn"><Button variant="contained" color="secondary" onClick={handleSearch}>Search</Button></div>
+                </div>
+            </div>
+            { searchResults !== undefined ? 
+                <>
+                    {searchResults.map(result => 
+                        <div className="search-containers">
+                            <div className="search-results">
+                                <Card className="element">
+                                    <div>{result.name}</div>
+                                    <div>{result.id}</div>
+                                    <img alt="" width="20%" height="50px" src={result.img} />
+                                    <div>OOOOOOOOO</div>
+                                </Card>
+                            </div>
+                        </div>
+                    )}
+                    
+                </>: null
+            }
+        </>
     )
 }
 

@@ -1,4 +1,41 @@
 .search-containers{
     display: flex;
+    justify-content: center;
+}
+.search-elements{
+    width: 100%;
+    display: flex;
     justify-content: space-around;
+    margin-top: -10px;
+}
+
+.searchBtn{
+    margin-top: 10px;
+}
+
+.search-results{
+    /* border: 1px solid red; */
+    /* margin-top: 20px; */
+    width: 70%;
+    /* min-height: 400px; */
+}
+
+.element{
+    margin: 5px;
+}
+
+@media(max-width: 861px){
+    .search-elements{
+        width: auto;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .searchBtn{
+        margin-top: 20px;
+    }
+
+    .search-results{
+        width: 95%;
+    }
 }
