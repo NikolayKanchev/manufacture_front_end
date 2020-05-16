@@ -39,7 +39,7 @@ export default function CountrySelect(props) {
   return (
     <Autocomplete
       id="country-select-demo"
-      style={{ width: 230, marginTop: "3px" }}
+      style={{ width: 180, marginTop: "3px" }}
       options={countries}
       classes={{
         option: classes.option,

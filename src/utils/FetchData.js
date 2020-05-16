@@ -404,18 +404,18 @@ const searchResults = [
     { 
         id: "0", 
         name : "Tesla", 
-        img: "https://s3.amazonaws.com/uifaces/faces/twitter/igorgarybaldi/128.jpg", 
+        img: "https://s3.amazonaws.com/uifaces/faces/twitter/flexrs/128.jpg", 
         country: "Bulgaria", 
         address: "Somewhere", 
         phone: "1234543223", 
         categories: [
             {
                 id: "0", 
-                name: "Some Category", 
+                name: "Health & Beauty", 
                 subCategories: [
                     {
                         id: "0", 
-                        name: "Sub Cat 1", 
+                        name: "Skin Care", 
                         products: [
                             {
                                 id: "0", 
@@ -434,16 +434,57 @@ const searchResults = [
                                 desc: "The best description ever", 
                                 minOrder: 9}
                             ]
-                        }
-                    ]
+                        },
+                        {
+                            id: "1", 
+                            name: "Baby Care", 
+                            products: [
+                                {
+                                    id: "0", 
+                                    name: "Product1", 
+                                    desc: "The best", 
+                                    minOrder: 5
+                                }, 
+                                {
+                                    id: "1", 
+                                    name: "Product2", 
+                                    desc: "The best description", 
+                                    minOrder: 7
+                                }, {
+                                    id: "2", 
+                                    name: "Product3", 
+                                    desc: "The best description ever", 
+                                    minOrder: 9
+                                },
+                                {
+                                    id: "3", 
+                                    name: "Product4", 
+                                    desc: "The best", 
+                                    minOrder: 5
+                                }, 
+                                {
+                                    id: "4", 
+                                    name: "Product5", 
+                                    desc: "The best description", 
+                                    minOrder: 7
+                                }, {
+                                    id: "5", 
+                                    name: "Product6", 
+                                    desc: "The best description ever", 
+                                    minOrder: 9
+                                }
+                                ]
+                            }
+                    ],
+                
             }, 
             {
                 id: "1", 
-                name: "Some other Category", 
+                name: "Gifts, Sports & Toys", 
                 subCategories: [
                     {
                         id: "0", 
-                        name: "Sub Cat 1", 
+                        name: "Gift Sets", 
                         products: [
                             {
                                 id: "0", 
@@ -462,23 +503,23 @@ const searchResults = [
                 ]
             }
         ], 
-        companyDesc: "Lorem ipsum" 
+        companyDesc: "ABC Company provides high quality plumbing services. We have been serving St. Washougal, Washington and neighboring areas for more than 12 years." 
     },
     { 
         id: "1", 
         name : "Ferrari", 
-        img: "https://s3.amazonaws.com/uifaces/faces/twitter/foczzi/128.jpg", 
+        img: "https://s3.amazonaws.com/uifaces/faces/twitter/zvchkelly/128.jpg", 
         country: "Bulgaria", 
         address: "Somewhere", 
         phone: "1234543223", 
         categories: [
             {
                 id: "0", 
-                name: "Some Category", 
+                name: "Electrical Components, Equipment & Telecoms", 
                 subCategories: [
                     {
                         id: "0", 
-                        name: "Sub Cat 1", 
+                        name: "Power Supplies", 
                         products: [
                             {
                                 id: "0", 
@@ -502,7 +543,7 @@ const searchResults = [
             }, 
             {
                 id: "1", 
-                name: "Some other Category", 
+                name: "Power Accessories", 
                 subCategories: [
                     {
                         id: "0", 
@@ -525,12 +566,12 @@ const searchResults = [
                 ]
             }
         ], 
-        companyDesc: "Lorem ipsum 2" },
+        companyDesc: "Sit and Chill is a Chinese restaurant in St. Irving, Texas. For nine years, we have been a local favorite for the best Chinese noodles in town." },
 
 ]
 
 export const fetchSearchResults = (searched) => {
-    const {country, category, subCategory, filter} = searched;
+    // const {country, category, subCategory, filter} = searched;
     return searchResults;
 }
 

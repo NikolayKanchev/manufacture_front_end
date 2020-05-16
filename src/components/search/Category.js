@@ -30,7 +30,7 @@ export default function ComboBox(props) {
         id={label}
         options={categories}
         getOptionLabel={(option) => option.title}
-        style={{ width: 230 }}
+        style={{ width: 180 }}
         disabled={disabled}
         renderInput={(params) => 
             <TextField 
@@ -43,7 +43,7 @@ export default function ComboBox(props) {
         <Autocomplete
         id={label}
         options={[]}
-        style={{ width: 230 }}
+        style={{ width: 180 }}
         disabled={disabled}
         renderInput={(params) => 
             <TextField 
