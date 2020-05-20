@@ -407,7 +407,9 @@ const searchResults = [
         img: "https://s3.amazonaws.com/uifaces/faces/twitter/flexrs/128.jpg", 
         country: "Bulgaria", 
         address: "Somewhere", 
-        phone: "1234543223", 
+        phone: "1234543223",
+        contactPerson: "Nikolay Kanchev",
+        contactEmail: "nikolay.kanchev@yahoo.com",
         categories: [
             {
                 id: "0", 
@@ -418,22 +420,44 @@ const searchResults = [
                         name: "Skin Care", 
                         products: [
                             {
-                                id: "0", 
+                                id: "0",
+                                img: "https://s3.amazonaws.com/uifaces/faces/twitter/mds/128.jpg",
                                 name: "Product1", 
-                                desc: "The best", 
-                                minOrder: 5
+                                desc: "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.", 
+                                minOrder: 5,
+                                minOrderStr: "pcs",
+                                capacity: 5000,
+                                capacityPeriod: " per month",
+                                materials: "textil, plastic",
+                                colors: "red, green, pink, black",
+                                sizes: "l, xl, xxl, xxxl"
                             }, 
                             {
-                                id: "1", 
+                                id: "1",
+                                img: "https://s3.amazonaws.com/uifaces/faces/twitter/ssbb_me/128.jpg", 
                                 name: "Product2", 
-                                desc: "The best description", 
-                                minOrder: 7
+                                desc: "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.", 
+                                minOrder: 50,
+                                minOrderStr: "pcs",
+                                capacity: 1000,
+                                capacityPeriod: " per year",
+                                materials: "textil, plastic",
+                                colors: "red, green, pink, black",
+                                sizes: "l, xl, xxl, xxxl"
                             }, {
-                                id: "2", 
+                                id: "2",
+                                img: "https://s3.amazonaws.com/uifaces/faces/twitter/eugeneeweb/128.jpg",
                                 name: "Product3", 
-                                desc: "The best description ever", 
-                                minOrder: 9}
-                            ]
+                                desc: "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.", 
+                                minOrder: 15,
+                                minOrderStr: "pcs",
+                                capacity: 5000,
+                                capacityPeriod: "per month",
+                                materials: "textil, plastic",
+                                colors: "red, green, pink, black",
+                                sizes: "l, xl, xxl, xxxl"
+                            }
+                        ]
                         },
                         {
                             id: "1", 
@@ -441,37 +465,79 @@ const searchResults = [
                             products: [
                                 {
                                     id: "0", 
+                                    img: "https://s3.amazonaws.com/uifaces/faces/twitter/carlosm/128.jpg",
                                     name: "Product1", 
-                                    desc: "The best", 
-                                    minOrder: 5
+                                    desc: "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.", 
+                                    minOrder: 12,
+                                    minOrderStr: "pcs",
+                                    capacity: 15000,
+                                    capacityPeriod: "per month",
+                                    materials: "textil, plastic",
+                                    colors: "red, green, pink, black",
+                                    sizes: "l, xl, xxl, xxxl"
                                 }, 
                                 {
                                     id: "1", 
+                                    img: "https://s3.amazonaws.com/uifaces/faces/twitter/desastrozo/128.jpg",
                                     name: "Product2", 
-                                    desc: "The best description", 
-                                    minOrder: 7
+                                    desc: "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.", 
+                                    minOrder: 120,
+                                    minOrderStr: "pcs",
+                                    capacity: 500000,
+                                    capacityPeriod: "per year",
+                                    materials: "textil, plastic",
+                                    colors: "red, green, pink, black",
+                                    sizes: "l, xl, xxl, xxxl"
                                 }, {
                                     id: "2", 
+                                    img: "https://s3.amazonaws.com/uifaces/faces/twitter/antongenkin/128.jpg",
                                     name: "Product3", 
-                                    desc: "The best description ever", 
-                                    minOrder: 9
+                                    desc: "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.", 
+                                    minOrder: 12,
+                                    minOrderStr: "pcs",
+                                    capacity: 5000,
+                                    capacityPeriod: "per month",
+                                    materials: "textil, plastic",
+                                    colors: "red, green, pink, black",
+                                    sizes: "l, xl, xxl, xxxl"
                                 },
                                 {
                                     id: "3", 
+                                    img: "https://s3.amazonaws.com/uifaces/faces/twitter/desastrozo/128.jpg",
                                     name: "Product4", 
-                                    desc: "The best", 
-                                    minOrder: 5
+                                    desc: "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.", 
+                                    minOrder: 12,
+                                    minOrderStr: "pcs",
+                                    capacity: 5000,
+                                    capacityPeriod: "per month",
+                                    materials: "textil, plastic",
+                                    colors: "red, green, pink, black",
+                                    sizes: "l, xl, xxl, xxxl"
                                 }, 
                                 {
-                                    id: "4", 
+                                    id: "4",
+                                    img: "https://s3.amazonaws.com/uifaces/faces/twitter/robbschiller/128.jpg",
                                     name: "Product5", 
-                                    desc: "The best description", 
-                                    minOrder: 7
+                                    desc: "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.", 
+                                    minOrder: 12,
+                                    minOrderStr: "pcs",
+                                    capacity: 5000,
+                                    capacityPeriod: "per month",
+                                    materials: "textil, plastic",
+                                    colors: "red, green, pink, black",
+                                    sizes: "l, xl, xxl, xxxl"
                                 }, {
-                                    id: "5", 
+                                    id: "5",
+                                    img: "https://s3.amazonaws.com/uifaces/faces/twitter/konus/128.jpg",
                                     name: "Product6", 
-                                    desc: "The best description ever", 
-                                    minOrder: 9
+                                    desc: "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.", 
+                                    minOrder: 12,
+                                    minOrderStr: "pcs",
+                                    capacity: 5000,
+                                    capacityPeriod: "per month",
+                                    materials: "textil, plastic",
+                                    colors: "red, green, pink, black",
+                                    sizes: "l, xl, xxl, xxxl"
                                 }
                                 ]
                             }
@@ -487,23 +553,39 @@ const searchResults = [
                         name: "Gift Sets", 
                         products: [
                             {
-                                id: "0", 
+                                id: "0",
+                                img: "https://s3.amazonaws.com/uifaces/faces/twitter/woodydotmx/128.jpg", 
                                 name: "Product1", 
-                                desc: "The best", 
-                                minOrder: 5
+                                desc: "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.", 
+                                minOrder: 12,
+                                minOrderStr: "pcs",
+                                capacity: 5000,
+                                capacityPeriod: "per month",
+                                materials: "textil, plastic",
+                                colors: "red, green, pink, black",
+                                sizes: "l, xl, xxl, xxxl"
                             }, 
                             {
-                                id: "1", 
+                                id: "1",
+                                img: "https://s3.amazonaws.com/uifaces/faces/twitter/lepetitogre/128.jpg", 
                                 name: "Product2", 
-                                desc: "The best description", 
-                                minOrder: 7
+                                desc: "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.", 
+                                minOrder: 12,
+                                minOrderStr: "pcs",
+                                capacity: 5000,
+                                capacityPeriod: "per month",
+                                materials: "textil, plastic",
+                                colors: "red, green, pink, black",
+                                sizes: "l, xl, xxl, xxxl"
                             }
                         ]
                     }
                 ]
             }
         ], 
-        companyDesc: "ABC Company provides high quality plumbing services. We have been serving St. Washougal, Washington and neighboring areas for more than 12 years." 
+        companyDesc: "ABC Company provides high quality plumbing services. We have been serving St. Washougal, Washington and neighboring areas for more than 12 years.",
+        companyLongerDesc: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
+
     },
     { 
         id: "1", 
@@ -511,7 +593,9 @@ const searchResults = [
         img: "https://s3.amazonaws.com/uifaces/faces/twitter/zvchkelly/128.jpg", 
         country: "Bulgaria", 
         address: "Somewhere", 
-        phone: "1234543223", 
+        phone: "1234543223",
+        contactPerson: "Nikolay Kanchev",
+        contactEmail: "nikolay.kanchev@yahoo.com",
         categories: [
             {
                 id: "0", 
@@ -523,20 +607,42 @@ const searchResults = [
                         products: [
                             {
                                 id: "0", 
+                                img: "https://s3.amazonaws.com/uifaces/faces/twitter/sbtransparent/128.jpg",
                                 name: "Product1", 
-                                desc: "The best", 
-                                minOrder: 5
+                                desc: "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.", 
+                                minOrder: 12,
+                                minOrderStr: "pcs",
+                                capacity: 5000,
+                                capacityPeriod: "per month",
+                                materials: "textil, plastic",
+                                colors: "red, green, pink, black",
+                                sizes: "l, xl, xxl, xxxl"
                             }, 
                             {
                                 id: "1", 
+                                img: "https://s3.amazonaws.com/uifaces/faces/twitter/matt3224/128.jpg",
                                 name: "Product2", 
-                                desc: "The best description", 
-                                minOrder: 7
+                                desc: "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.", 
+                                minOrder: 12,
+                                minOrderStr: "pcs",
+                                capacity: 5000,
+                                capacityPeriod: "per month",
+                                materials: "textil, plastic",
+                                colors: "red, green, pink, black",
+                                sizes: "l, xl, xxl, xxxl"
                             }, {
                                 id: "2", 
+                                img: "https://s3.amazonaws.com/uifaces/faces/twitter/axel/128.jpg",
                                 name: "Product3", 
-                                desc: "The best description ever", 
-                                minOrder: 9}
+                                desc: "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.", 
+                                minOrder: 12,
+                                minOrderStr: "pcs",
+                                capacity: 5000,
+                                capacityPeriod: "per month",
+                                materials: "textil, plastic",
+                                colors: "red, green, pink, black",
+                                sizes: "l, xl, xxl, xxxl"
+                            }
                             ]
                         }
                     ]
@@ -550,24 +656,39 @@ const searchResults = [
                         name: "Sub Cat 1", 
                         products: [
                             {
-                                id: "0", 
+                                id: "0",
+                                img: "https://s3.amazonaws.com/uifaces/faces/twitter/therealmarvin/128.jpg", 
                                 name: "Product1", 
                                 desc: "The best", 
-                                minOrder: 5
+                                minOrder: 12,
+                                minOrderStr: "pcs",
+                                capacity: 5000,
+                                capacityPeriod: "per month",
+                                materials: "textil, plastic",
+                                colors: "red, green, pink, black",
+                                sizes: "l, xl, xxl, xxxl"
                             }, 
                             {
                                 id: "1", 
+                                img: "https://s3.amazonaws.com/uifaces/faces/twitter/karthipanraj/128.jpg",
                                 name: "Product2", 
                                 desc: "The best description", 
-                                minOrder: 7
+                                minOrder: 12,
+                                minOrderStr: "pcs",
+                                capacity: 5000,
+                                capacityPeriod: "per month",
+                                materials: "textil, plastic",
+                                colors: "red, green, pink, black",
+                                sizes: "l, xl, xxl, xxxl"
                             }
                         ]
                     }
                 ]
             }
         ], 
-        companyDesc: "Sit and Chill is a Chinese restaurant in St. Irving, Texas. For nine years, we have been a local favorite for the best Chinese noodles in town." },
-
+        companyDesc: "Sit and Chill is a Chinese restaurant in St. Irving, Texas. For nine years, we have been a local favorite for the best Chinese noodles in town.",
+        companyLongerDesc: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
+    }
 ]
 
 export const getCompany = (id) => {

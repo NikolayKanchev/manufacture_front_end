@@ -45,10 +45,13 @@ const Footer = (props) =>{
         <div className="sub-container">
           <div className="content">
             <h3 className="title">Follow us</h3>
-            <div><Facebook /></div>
-            <div><Twitter /></div>
-            <div><LinkedIn /></div>
-            <div><YouTube /></div>
+            <div className="social">
+              <div><Facebook /></div>
+              <div><Twitter /></div>
+              <div><LinkedIn /></div>
+              <div><YouTube /></div>
+            </div>
+            
           </div>
         </div>
       </div>

@@ -7,6 +7,18 @@
   pointer-events: none;
 }
 
+.title{
+  font-size: 26px;
+  font-weight: 900;
+  margin-bottom: 20px;
+}
+
+.small-title{
+  font-size: 18px;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

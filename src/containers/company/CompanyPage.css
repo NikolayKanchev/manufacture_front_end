@@ -3,13 +3,207 @@
     justify-content: center;
 }
 
+.content-width{
+    width: 70%;
+}
+
 .card-company{
-    width: 80%;
+    width: 100%;
     min-height: 400px;
+    margin-bottom: 10px;
+}
+
+.company-flex{
+    display: flex;
+    justify-content: space-around;
+    width: 95%;
+}
+
+.company-img{
+    width: 250px;
+    height: auto;
+}
+
+.company-desc{
+    width: 65%;
+}
+
+.img-and-desc, .address-cont, .border-flex{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    text-align: justify;
+}
+
+.border-top{
+    border-top: 1px solid #eeeeee;
+    width: 91%;
+    margin-bottom: 10px;
+}
+
+.hr{
+    margin-top: -10px;
+    margin-bottom: 20px;
+    width: 91%;
+}
+
+.blue{
+    color: #2a3eb1;
+}
+
+.pink{
+    color: #f50057;
+}
+
+.weight{
+    font-weight: 700;
+}
+
+.small-italic{
+    font-size: 14px;
+    font-style: italic;
+}
+
+.address-cont{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.address, .distance, .country{
+    text-align: center;
+    border-top: 1px solid #eeeeee;
+    /* border-bottom: 1px solid #eeeeee; */
+}
+
+.company-products{
+    display: block;
+    margin-bottom: 20px;
+}
+
+.cat-name, .sub-cat-name{
+    font-size: 14px;
+    font-weight: 700;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.names{
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+}
+
+.product-main-cont{
+    display: flex;
+    justify-content: center;
+    /* border: 3px solid red; */
+    /* width: 100%; */
+}
+
+.product-cont{
+    /* border: 1px solid blue; */
+    margin-bottom: 5px;
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    height: auto;
+    border-top: 2px solid #eeeeee;
+    padding-top: 5px;
+    width: 90%;
+}
+
+.p-flex{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    /* border: 1px solid red; */
+}
+
+.p-image{
+    /* border: 1px solid red; */
+    width: 140px;
+    height: 140px;
+}
+
+.p-more-info{
+    /* border: 1px solid red; */
+    width: 300px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.more-item{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.p-title-desc{
+    /* border: 1px solid red; */
+    width: 400px;
+}
+
+.p-desc-text{
+    font-size: 12px;
+    font-weight: 500;
+    font-style: italic;
 }
 
 @media(max-width: 861px){
-    .card{
-        width: 95%;
+    .content-width{
+        width: 90%;
     }
+
+    .company-flex{
+        display: block;
+        width: 240px;
+    }
+
+    .company-desc, .company-img{
+        width: 240px;
+    }
+
+    .hr{
+        width: 60%;
+    }
+
+    .address-cont{
+        display: block;
+    }
+
+    .address, .country, .distance{
+        margin-bottom: 10px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .names{
+        display: block;
+    }
+
+    .slash{
+        display: none;
+    }
+
+    .product-cont{
+        margin-bottom: 20px;
+    }
+    
+    .p-flex{
+        display: block;
+    }
+
+    .p-image{
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .p-image img{
+        width: 150px;
+    }
+
+    .p-title-desc{
+        width: 100%;
+    }
+
 }
