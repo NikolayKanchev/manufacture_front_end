@@ -1,0 +1,59 @@
+.ideas-flex{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 90px;
+}
+
+.ideas-main{
+    width: 70%;
+    min-height: 490px;
+    /* border: 1px solid red; */
+}
+
+.card-idea{
+    /* width: 80%; */
+    min-height: 100px;
+    margin-bottom: 10px;
+}
+
+.add-btn{
+    position: absolute;
+    top: 570px;
+    left: 1250px;
+}
+
+.no-ideas-cont{
+    margin-top: 100px;
+    width: 50%;
+    height: auto;
+    border-radius: 50%;
+    background-color: #fce4ec;
+    border: 1px dashed #2a3eb1;
+}
+
+.no-ideas-info{
+    margin-top: 20px;
+    width: 100%;
+}
+
+.no-ideas-btn{
+    margin-top: 30px;
+    padding-bottom: 50px;
+}
+
+.ideas-title{
+    font-size: 26px;
+    font-weight: 900;
+}
+
+.not-loged-in{
+    margin-top: 150px;
+}
+
+@media(max-width: 861px){
+
+    .add-btn{
+        top: 565px;
+        left: 370px;
+    }
+}

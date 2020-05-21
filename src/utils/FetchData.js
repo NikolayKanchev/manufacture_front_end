@@ -691,6 +691,94 @@ const searchResults = [
     }
 ]
 
+const usersIdeas = [
+    {
+        userId: "0",
+        projects: [
+            {
+                id: "0",
+                name: "The best project",
+                description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident",
+                category: "Category",
+                subCategory: "Sub Category",
+                matetials: ["iron","leder","textil","plastic"],
+                sizes: ["small", "medium", "large"],
+                quantity: 15,
+                forPeriod: "per year",
+            },
+            {
+                id: "1",
+                name: "The best project",
+                description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident",
+                category: "Category",
+                subCategory: "Sub Category",
+                matetials: ["iron","leder","textil","plastic"],
+                sizes: ["small", "medium", "large"],
+                quantity: 15,
+                forPeriod: "per year",
+            },
+        ]
+    },
+    {
+        userId: "1",
+        projects: [
+            {
+                id: "0",
+                name: "The best project",
+                description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident",
+                category: "Category",
+                subCategory: "Sub Category",
+                matetials: ["iron","leder","textil","plastic"],
+                sizes: ["small", "medium", "large"],
+                quantity: 15,
+                forPeriod: "per year",
+            },
+            {
+                id: "1",
+                name: "The best project",
+                description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident",
+                category: "Category",
+                subCategory: "Sub Category",
+                matetials: ["iron","leder","textil","plastic"],
+                sizes: ["small", "medium", "large"],
+                quantity: 15,
+                forPeriod: "per year",
+            },
+        ]
+    },
+    {
+        userId: "2",
+        projects: [
+            {
+                id: "0",
+                name: "The best project",
+                description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident",
+                category: "Category",
+                subCategory: "Sub Category",
+                matetials: ["iron","leder","textil","plastic"],
+                sizes: ["small", "medium", "large"],
+                quantity: 15,
+                forPeriod: "per year",
+            },
+            {
+                id: "1",
+                name: "The best project",
+                description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident",
+                category: "Category",
+                subCategory: "Sub Category",
+                matetials: ["iron","leder","textil","plastic"],
+                sizes: ["small", "medium", "large"],
+                quantity: 15,
+                forPeriod: "per year",
+            },
+        ]
+    },
+]
+
+export const getProjects = (id) => {
+    return usersIdeas[id].projects;
+}
+
 export const getCompany = (id) => {
     return searchResults[id];
 }
@@ -715,6 +803,10 @@ export const fetchPlansCards = () => {
 export const fetchHomeInfoCards = () => {
     return homeInfoCards;
 }
+
+export const fetchCreateProjectDesc = () => {
+    return homeInfoCards[1];
+};
 
 const authorization = (token) => {
     return { headers: {'Authorization': `Bearer ${token}`}}
