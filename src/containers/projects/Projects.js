@@ -5,16 +5,26 @@ import { getProjects } from '../../utils/FetchData';
 import { fetchCreateProjectDesc } from '../../utils/FetchData';
 import history from '../../utils/History';
 
-import AddButton from '../../components/buttons/Button';
+import AddIcon from '@material-ui/icons/Add';
 import CardsList from '../../components/cards/CardsList';
 
 import './Projects.css'
 import { Card, Button } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+import Fab from '@material-ui/core/Fab';
 
+const useStyles = makeStyles((theme) =>
+  createStyles({
+    fab: {
+      margin: theme.spacing(1),
+    }
+  }),
+);
 
 const Projects = () => {
     const [projects, setProjects] = useState();
     const [ {id, logedIn} ] = useReduxState();
+    const classes = useStyles();
 
     const card = fetchCreateProjectDesc();
 
@@ -22,20 +32,24 @@ const Projects = () => {
         window.scrollTo(0, 0);
 
         async function fetchData() {
-            const result = await getProjects(id);
-            // const result = await getProjects(2);
+            // const result = await getProjects(id);
+            const result = await getProjects(0);
             setProjects(result);
         }
 
-        if (logedIn){
-        // if (1){
+        // if (logedIn){
+        if (1){
             fetchData();
         }
       }, [id, projects, logedIn]);
+
+      const handleRequestOffers = () => {
+          alert("Offers requested")
+      }
     
     return(
         <>
-        {logedIn ? 
+        {!logedIn ? 
             <>
             {projects ? 
                 <>
@@ -45,19 +59,81 @@ const Projects = () => {
                             {projects.map(p => 
                                 <div key={p.id}>
                                     <Card className="card-idea">
-                                        <div>{p.name}</div>
+                                        <div className="small-title blue p-small-title">{p.name}</div>
+                                        <div className="ideas-flex-space-arround">
+                                            <div className="i-column flex-company">
+                                                <div className="desc">
+                                                    <div className="i-column-title">Description</div>
+                                                    <div className="small-italic">{p.description}</div>
+                                                </div>
+                                            </div>
+                                            <div className="i-column">
+                                            <div className="i-column-title">Category</div>
+                                                <div className="small-italic blue">{p.category} / <span className="pink">{p.subCategory}</span></div>
+                                                <br></br>
+                                                <div className="i-column-title">Materials</div>
+                                                <div className="flex-company">
+                                                    { p.materials.map((m, i) => 
+                                                        <div key={i}>
+                                                            {p.materials.length - 1 === i? 
+                                                                <span className="small-italic blue ml-5">{m}</span>: 
+                                                                <span className="small-italic blue ml-5">{m}, </span>
+                                                            }
+                                                        </div>
+                                                    )}
+                                                </div>
+                                                <br></br>
+                                                <div className="i-column-title">Sizes</div>
+                                                <div className="flex-company">
+                                                    { p.sizes.map((s, i) => 
+                                                        <div key={i}>
+                                                            {p.sizes.length - 1 === i? 
+                                                                <span className="small-italic blue ml-5">{s}</span>: 
+                                                                <span className="small-italic blue ml-5">{s}, </span>
+                                                            }
+                                                        </div>
+                                                    )} 
+                                                </div>
+                                            </div>
+                                            <div className="i-column">
+                                                <div className="i-column-title">Desired Quantity</div>
+                                                <div className="small-italic blue">{p.quantity} pcs</div>
+                                                <br></br>
+                                                <div className="i-column-title">For Period</div>
+                                                <div className="small-italic blue">{p.forPeriod}</div>
+                                                <br></br>
+                                                <div className="i-column-title">Status</div>
+                                                <div className="small-italic blue">{p.statusMessage}</div>
+                                                { p.offersRequested && p.offersReceived ? 
+                                                   <>
+                                                        <br></br>
+                                                        <div><Button variant="outlined" color="secondary" onClick={() => history.push("/seeOffers/" + p.id)}>See Offers</Button></div>
+                                                   </>:null
+                                                }
+                                                { !p.offersRequested ? 
+                                                   <>
+                                                        <br></br>
+                                                        <div><Button variant="outlined" color="secondary" onClick={handleRequestOffers}>Request Offers</Button></div>
+                                                   </>:null
+                                                }
+                                            </div>
+                                        </div>
                                     </Card>
                                 </div>
                             )}
                         </div>
                     </div>
-                    <div className="add-btn"><AddButton variant="add" color="secondary"/></div>
+                    <div className="add-btn">
+                       <Fab color="secondary" aria-label="add" className={classes.fab}>
+                            <AddIcon onClick={() => history.push("/create-project")}/> 
+                        </Fab> 
+                    </div>
                 </>: 
                 <>
                     <div className="ideas-flex">
                         <div className="no-ideas-cont">
                             <div className="title">You don't have any projects yet!</div>
-                            <div className="no-ideas-btn"><Button variant="outlined" color="primary">Create Project</Button></div>
+                            <div className="no-ideas-btn"><Button variant="outlined" color="primary" onClick={() => history.push("/create-project")}>Create Project</Button></div>
                         </div>
                     </div>
                     <div className="ideas-flex">

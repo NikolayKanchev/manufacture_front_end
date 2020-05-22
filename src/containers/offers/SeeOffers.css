@@ -1,0 +1,65 @@
+.offers-cont{
+    margin-top: 100px;
+}
+
+.offer-card{
+    margin-top: 20px;
+}
+
+.offers-flex{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.offers{
+    width: 70%;
+}
+
+.ml-5{
+    margin-left: 5px;
+}
+
+.mt-20{
+    margin-top: 20px;
+}
+
+.mt-minus-10{
+    margin-top: -10px;
+}
+
+.offer-content-flex{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+}
+
+.offer-column{
+    width: 200px;
+    min-height: 150px;
+}
+
+.pricing{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.price-cont{
+    min-width: 50px;
+}
+
+.price-flex{
+    display: flex;
+    justify-content: space-around;
+}
+
+@media(max-width: 861px){
+    .offer-content-flex{
+        display: block;
+    }
+
+    .offer-column{
+        width: 99%;
+    }
+}

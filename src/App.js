@@ -23,6 +23,8 @@ import ResetPass from './containers/resetPass/ResetPass';
 import UpdatePass from './containers/resetPass/UpdatePass';
 import MyAccount from './containers/myAccount/MyAccount';
 import CompanyPage from './containers/company/CompanyPage';
+import SeeOffers from './containers/offers/SeeOffers';
+import CreateProject from './containers/projects/CreateProject';
 
 import history from './utils/History';
 import './App.css';
@@ -59,6 +61,10 @@ class App extends Component {
                     <Route path="/updatePass/:token" component={UpdatePass} exact/>
                     <Route path="/myAccount" component={MyAccount} exact/>
                     <Route path="/company/:id" component={CompanyPage} exact/>
+                    <Route path="/seeOffers/:projectId" component={SeeOffers} exact/>
+                    <Route path="/create-project" component={CreateProject} exact/>
+
+                    {/* /create-project */}
                 </Switch>
               </div>
             </Router>

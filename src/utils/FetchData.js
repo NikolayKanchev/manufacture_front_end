@@ -701,10 +701,13 @@ const usersIdeas = [
                 description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident",
                 category: "Category",
                 subCategory: "Sub Category",
-                matetials: ["iron","leder","textil","plastic"],
+                materials: ["iron","leder","textil","plastic"],
                 sizes: ["small", "medium", "large"],
                 quantity: 15,
                 forPeriod: "per year",
+                offersRequested: false,
+                offersReceived: false,
+                statusMessage: "You haven't requested offers yet!",
             },
             {
                 id: "1",
@@ -712,10 +715,13 @@ const usersIdeas = [
                 description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident",
                 category: "Category",
                 subCategory: "Sub Category",
-                matetials: ["iron","leder","textil","plastic"],
+                materials: ["iron","leder","textil","plastic"],
                 sizes: ["small", "medium", "large"],
                 quantity: 15,
                 forPeriod: "per year",
+                offersRequested: true,
+                offersReceived: true,
+                statusMessage: "Offers received",
             },
         ]
     },
@@ -728,10 +734,13 @@ const usersIdeas = [
                 description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident",
                 category: "Category",
                 subCategory: "Sub Category",
-                matetials: ["iron","leder","textil","plastic"],
+                materials: ["iron","leder","textil","plastic"],
                 sizes: ["small", "medium", "large"],
                 quantity: 15,
                 forPeriod: "per year",
+                offersRequested: true,
+                offersReceived: false,
+                statusMessage: "Collecting offers",
             },
             {
                 id: "1",
@@ -739,10 +748,13 @@ const usersIdeas = [
                 description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident",
                 category: "Category",
                 subCategory: "Sub Category",
-                matetials: ["iron","leder","textil","plastic"],
+                materials: ["iron","leder","textil","plastic"],
                 sizes: ["small", "medium", "large"],
                 quantity: 15,
                 forPeriod: "per year",
+                offersRequested: false,
+                offersReceived: false,
+                statusMessage: "You haven't requested offers yet!",
             },
         ]
     },
@@ -755,10 +767,13 @@ const usersIdeas = [
                 description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident",
                 category: "Category",
                 subCategory: "Sub Category",
-                matetials: ["iron","leder","textil","plastic"],
+                materials: ["iron","leder","textil","plastic"],
                 sizes: ["small", "medium", "large"],
                 quantity: 15,
                 forPeriod: "per year",
+                offersRequested: true,
+                offersReceived: true,
+                statusMessage: "Offers received",
             },
             {
                 id: "1",
@@ -766,14 +781,110 @@ const usersIdeas = [
                 description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident",
                 category: "Category",
                 subCategory: "Sub Category",
-                matetials: ["iron","leder","textil","plastic"],
+                materials: ["iron","leder","textil","plastic"],
                 sizes: ["small", "medium", "large"],
                 quantity: 15,
                 forPeriod: "per year",
+                offersRequested: true,
+                offersReceived: false,
+                statusMessage: "Collecting Offers ....",
             },
         ]
     },
 ]
+
+const projectOffers = [
+    { 
+        projectId: "0",
+        offers: [
+            { 
+                id: "0",
+                offerNumber: "0987654",
+                companyId: "0",
+                companyName: "Bella",
+                capacity: 200000,
+                period: "month",
+                text: "It is a long established fact that a reader will be distracted by the readable content of a page",
+                validTo: "20.06.2020",
+                prices: [
+                    {id: "0", price: 10, currency: "EUR", orderFrom: 0, orderTo: 1000},
+                    {id: "1", price: 8, currency: "EUR", orderFrom: 1001, orderTo: 10000},
+                    {id: "2", price: 5, currency: "EUR", orderFrom: 10001, orderTo: 200000},
+                ],
+                materials: ["iron","leder","textil","plastic"],
+                sizes: ["small", "medium", "large"],
+            },
+            { 
+                id: "1",
+                offerNumber: "23456",
+                companyId: "0",
+                companyName: "Deku Stans Ltd",
+                capacity: 500000,
+                period: "month",
+                text: "It is a long established fact that a reader will be distracted by the readable content of a page",
+                validTo: "20.01.2021",
+                prices: [
+                    {id: "0", price: 20, currency: "$", orderFrom: 0, orderTo: 5000},
+                    {id: "1", price: 18, currency: "$", orderFrom: 5001, orderTo: 50000},
+                    {id: "2", price: 15, currency: "$", orderFrom: 50001, orderTo: 500000},
+                ],
+                materials: ["iron","leder","textil","plastic"],
+                sizes: ["small", "medium", "large"],
+            }
+        ]
+    },
+    { 
+        projectId: "1",
+        offers: [
+            { 
+                id: "0",
+                offerNumber: "0987654",
+                companyId: "1",
+                companyName: "Bella",
+                capacity: 200000,
+                period: "month",
+                text: "It is a long established fact that a reader will be distracted by the readable content of a page",
+                validTo: "20.06.2020",
+                prices: [
+                    {id: "0", price: 10, currency: "EUR", orderFrom: 0, orderTo: 1000},
+                    {id: "1", price: 8, currency: "EUR", orderFrom: 1001, orderTo: 10000},
+                    {id: "2", price: 5, currency: "EUR", orderFrom: 10001, orderTo: 200000},
+                ],
+                materials: ["iron","leder","textil","plastic"],
+                sizes: ["small", "medium", "large"],
+            },
+            { 
+                id: "1",
+                offerNumber: "23456",
+                companyId: "0",
+                companyName: "Bella",
+                capacity: 500000,
+                period: "month",
+                text: "It is a long established fact that a reader will be distracted by the readable content of a page",
+                validTo: "20.01.2021",
+                prices: [
+                    {id: "0", price: 20, currency: "$", orderFrom: 0, orderTo: 5000},
+                    {id: "1", price: 18, currency: "$", orderFrom: 5001, orderTo: 50000},
+                    {id: "2", price: 15, currency: "$", orderFrom: 50001, orderTo: 500000},
+                ],
+                materials: ["iron","leder","textil","plastic"],
+                sizes: ["small", "medium", "large"],
+            }
+        ]
+    }
+]
+
+export const getOffers = (projectId) => {
+    console.log(projectId);
+    
+    return projectOffers[projectId].offers;
+}
+
+export const getProject = (projectId, userId) => {
+    console.log(userId, projectId);
+    
+    return usersIdeas[userId].projects[projectId];
+}
 
 export const getProjects = (id) => {
     return usersIdeas[id].projects;
