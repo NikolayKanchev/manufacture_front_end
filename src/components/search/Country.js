@@ -27,7 +27,7 @@ const useStyles = makeStyles({
 export default function CountrySelect(props) {
   const classes = useStyles();
   let country = "";
-  const { handleSelectCountry } = props;
+  const { handleSelectCountry, variant, size } = props;
 
   const handleChange = (value) => {
     if (country !== value.value){
@@ -57,8 +57,8 @@ export default function CountrySelect(props) {
         <TextField
           {...params}
           label="Choose a country"
-          variant="standard"
-          size="small"
+          variant={variant ? variant : "standard"}
+          size={size ? size : "small"}
           // required={true}
           // error={true}
           inputProps={{

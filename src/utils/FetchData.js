@@ -874,6 +874,43 @@ const projectOffers = [
     }
 ]
 
+const options = {
+    materials: [
+      { id: 0, title: 'Plastic' },
+      { id: 1, title: 'Metal' },
+      { id: 2, title: 'Iron' },
+      { id: 3, title: 'Textil' },
+    ],
+    sizes: [
+        { id: 0, title: 'small' },
+        { id: 1, title: 'medium' },
+        { id: 2, title: 'large' },
+        { id: 3, title: 'xl' },
+        { id: 4, title: 'xxl' },
+        { id: 5, title: 'xxxl' },
+        { id: 6, title: '1 kg' },
+        { id: 7, title: '2 kg' },
+        { id: 8, title: '3 kg' },
+        { id: 9, title: '1 l' },
+        { id: 10, title: '2 l' },
+        { id: 11, title: '3 l' },
+      ],
+    period: [
+        { id: 0, title: 'Just once' },
+        { id: 1, title: 'Every week' },
+        { id: 2, title: 'Every 2 weeks' },
+        { id: 3, title: 'Every month' },
+        { id: 4, title: 'Every 3 months' },
+        { id: 5, title: 'Every halv an year' },
+        { id: 6, title: 'Every year' },
+        { id: 7, title: 'None of the options' },
+      ],
+}
+
+export const getOptions = (type) => {
+    return options[type];
+}
+
 export const getOffers = (projectId) => {
     console.log(projectId);
     

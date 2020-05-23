@@ -9,13 +9,18 @@ const validatePass = (password) => {
     return re.test(password);
 }
 
-const validateName = (name) =>{
+const validateName = (name) => {
     return name.length > 3; 
-  }
+}
+
+const validateQuantity = (i) => {
+    return Number.isInteger(i);
+}
 
 export {
     validateEmail,
     validatePass,
-    validateName
+    validateName,
+    validateQuantity
 }
 
