@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import './Search.css'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -13,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Tags(props) {
-  const {handleSelected, multiOptions, label, variant, size, width} = props;
+  const {handleSelected, multiOptions, label, variant, size} = props;
   const classes = useStyles();
   const chosenOptions = useRef([]);
 
@@ -47,7 +48,7 @@ export default function Tags(props) {
         options={multiOptions}
         getOptionLabel={(option) => option.title}
         filterSelectedOptions
-        style={width}
+        className="multiple-width"
         renderInput={(params) => (
           <TextField
             {...params}

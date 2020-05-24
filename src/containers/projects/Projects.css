@@ -99,6 +99,17 @@
     min-height: 120px;
 }
 
+.fadeOut{
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 3s 6s, opacity 6s linear;
+}
+.fadeIn{
+    opacity:1;
+    visibility: visible;
+    transition: visibility 3s 6s, opacity 6s linear;
+}
+
 @media(max-width: 861px){
 
     .add-btn{

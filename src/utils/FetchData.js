@@ -744,7 +744,7 @@ const usersIdeas = [
             },
             {
                 id: "1",
-                name: "The best project",
+                name: "The best project 2",
                 description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident",
                 category: "Category",
                 subCategory: "Sub Category",
@@ -907,19 +907,33 @@ const options = {
       ],
 }
 
+export const requestOffers = (projectId, userId) => {
+    const project = usersIdeas[userId].projects[projectId];
+    project.offersRequested = true;
+    project.statusMessage = "Collecting offers";
+    return { status: 200, message: "Offers requested", project: project }
+}
+
+export const createProject = (project, userId) => {
+    const newProject = {
+        id: "" + usersIdeas[userId].projects.length,
+        ...project
+    }
+ 
+    usersIdeas[userId].projects.push(newProject)
+    return { status: 200, message: "Project - successfully created!"}
+    
+}
+
 export const getOptions = (type) => {
     return options[type];
 }
 
-export const getOffers = (projectId) => {
-    console.log(projectId);
-    
+export const getOffers = (projectId) => {  
     return projectOffers[projectId].offers;
 }
 
 export const getProject = (projectId, userId) => {
-    console.log(userId, projectId);
-    
     return usersIdeas[userId].projects[projectId];
 }
 

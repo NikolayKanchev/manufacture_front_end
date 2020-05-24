@@ -20,19 +20,19 @@ const SeeOffers = ({match}) => {
 
         async function fetchData() {
             const result = await getOffers(projectId);
-            // const result2 = await getProject(projectId, id);
+            const result2 = await getProject(projectId, id);
             setOffers(result);
-            // setProject(result2);
+            setProject(result2);
         }
         fetchData();
       }, [projectId, offers, id]);
     
     return(
         <>
-            { offers ? 
+            { offers && logedIn ? 
                 <>
-                    {/* {project ? <>{project.name}</>: null} */}
-                    <div className="title">Offers</div>
+                    {project ? <><div className="title">Offers for "{project.name}"</div></>: null}
+                    
                     <div className="offers-flex">
                         <div className="offers">                        
                             { offers.map(o => 

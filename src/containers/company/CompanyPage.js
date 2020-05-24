@@ -67,7 +67,7 @@ const CompanyPage = ({match}) => {
                                                 
                                                 <div className="products-cont">
                                                     {sCat.products.map(p =>
-                                                        <div className="product-main-cont">
+                                                        <div className="product-main-cont" key={p.id}>
                                                             <div key={p.id} className="product-cont">
                                                                 <div className="p-flex">
                                                                     <div className="p-image">

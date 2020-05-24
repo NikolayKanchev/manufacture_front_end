@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 
 import { useReduxState } from '../../utils/State';
 import { getProjects } from '../../utils/FetchData';
-import { fetchCreateProjectDesc } from '../../utils/FetchData';
+import { fetchCreateProjectDesc, requestOffers } from '../../utils/FetchData';
 import history from '../../utils/History';
 
 import AddIcon from '@material-ui/icons/Add';
@@ -32,24 +32,33 @@ const Projects = () => {
         window.scrollTo(0, 0);
 
         async function fetchData() {
-            // const result = await getProjects(id);
-            const result = await getProjects(0);
+            const result = await getProjects(id);
+            // const result = await getProjects(1);
             setProjects(result);
         }
 
-        // if (logedIn){
-        if (1){
+        if (logedIn){
+        // if (1){
             fetchData();
         }
       }, [id, projects, logedIn]);
 
-      const handleRequestOffers = () => {
-          alert("Offers requested")
+      const handleRequestOffers = async (e, projectId) => {
+          e.preventDefault();
+          
+          const res = await requestOffers(projectId, id);
+          if (res.status === 200){
+                const newProjects = [...projects];
+                newProjects[projectId] = res.project;
+                setProjects(newProjects);
+          }
       }
     
     return(
         <>
-        {!logedIn ? 
+        {/* {!logedIn ?  */}
+        {logedIn ? 
+
             <>
             {projects ? 
                 <>
@@ -113,7 +122,7 @@ const Projects = () => {
                                                 { !p.offersRequested ? 
                                                    <>
                                                         <br></br>
-                                                        <div><Button variant="outlined" color="secondary" onClick={handleRequestOffers}>Request Offers</Button></div>
+                                                        <div><Button variant="outlined" color="secondary" onClick={(e) => handleRequestOffers(e, p.id)}>Request Offers</Button></div>
                                                    </>:null
                                                 }
                                             </div>

@@ -1,18 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
-
-import Message from '../../components/message/Message';
-import { validateQuantity, validatePass, validateName } from '../../utils/Validators';
+import { validateQuantity, validateName } from '../../utils/Validators';
 import history from '../../utils/History';
+import { useReduxState } from '../../utils/State';
+import { 
+    fetchCategories, 
+    fetchSubCategories, 
+    getOptions, 
+    createProject 
+} from '../../utils/FetchData';
 import MultipleSelect from '../../components/search/Multiple';
 import CategorySearch from '../../components/search/Category';
 
-import { registerRequest, fetchCategories, fetchSubCategories, getOptions } from '../../utils/FetchData';
-
+import MuiAlert from '@material-ui/lab/Alert';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
@@ -20,13 +21,15 @@ import Container from '@material-ui/core/Container';
 import './Projects.css';
 
 const CreateProject = () => {
-const [projectName, setProjectName] = useState("");
 const [description, setDescription] = useState("");
 const [quantity, setQuantity] = useState(0);
 const [errPN, setErrPN] = useState(false);
 const [errDesc, setErrDesc] = useState(false);
 const [errQuantity, setErrQuantity] = useState(false);
-const [errorMessage, setErrorMessage] = useState("");
+const [successMessage, setSuccessMessage] = useState(undefined);
+const [errorMessage, setErrorMessage] = useState(undefined);
+const [ { id } ] = useReduxState();
+// const id = "2";
 
 const categories = fetchCategories();
 const materials =  getOptions("materials");
@@ -34,6 +37,8 @@ const sizes =  getOptions("sizes");
 const periodOptions =  getOptions("period");
 
 const [subCategories, setSubCategories] = useState();
+
+const [projectName, setProjectName] = useState("");
 const category = useRef();
 const subCategory = useRef();
 const selectedSizes = useRef([]);
@@ -42,7 +47,6 @@ const period = useRef("Just once");
 
 const handleSelectCategory = async (selected) => {
     const data = await fetchSubCategories(selected);
-
     setSubCategories(data);
     category.current = selected;
 }
@@ -64,66 +68,77 @@ const handleSelectPeriod = (selected) => {
 const handleSelectedMaterials = (selected) => {
     selectedMaterials.current = selected;    
 }
-//                          description: "fffffffffffff",
-//                          category: "Category",
-//                          subCategory: "Sub Category",
-//                          materials: ["iron","leder","textil","plastic"],
-//                          sizes: ["small", "medium", "large"],
-//                          quantity: 15,
-//                          forPeriod: "per year",
-//                 offersRequested: true,
-//                 offersReceived: false,
-//                 statusMessage: "You haven't requested offers yet!",
 
 useEffect(() => {
   window.scrollTo(0, 0);
 });
 
-const displayError = (message) => {
-    setErrorMessage(message);
-    setTimeout(() => {
-        setErrorMessage("");
-    }, 5000);
-  }
-  const handleSubmit = (e) => {
+const displayAlertMessage = (message, type) => {
+    if (type === "error"){
+        setErrorMessage(message);
+        setTimeout(() => {
+            setErrorMessage(undefined);        
+        }, 5000);
+    }
+
+    if (type === "success"){
+        setSuccessMessage(message);
+        setTimeout(() => {
+            setSuccessMessage(undefined);
+            history.push("/projects");       
+        }, 1000);
+    }
+}
+
+const handleSubmit = async(e) => {
     e.preventDefault();
 
     if (!validateName(projectName)) { setErrPN(true); }
     if (description === "") { setErrDesc(true); }
-    // if (email === "") { setErrEmail(true); }
-    // if (period === "") { setErrPass(true); }
 
     if(projectName !== "" && description !== ""){      
       if (!errPN && !errDesc){
 
         const projectInfo = {
-          projectName: projectName,
-          description: description,
-        //   email: email,
-        //   period: period
+            name: projectName,
+            description: description,
+            category: category.current,
+            subCategory: subCategory.current,
+            materials: selectedMaterials.current.current,
+            sizes: selectedSizes.current.current,
+            quantity: quantity,
+            forPeriod: period.current,
+            offersRequested: false,
+            offersReceived: false,
+            statusMessage: "You haven't requested offers yet!",
+        }
+
+        const res = await createProject(projectInfo, id);
+        if (res.status === 200){
+            displayAlertMessage(res.message, "success");
         }
         
-        registerRequest(projectInfo)
-        .then(res => {          
-          if (res.data.message === "Your registration was successful!"){
-            history.push('/login');
-          }else{
-            console.log(res);
-            displayError("Something went wrong! Try again!")
-          }
-        })
-        .catch(err => {
-          displayError(err.message);
-        })
+        // registerRequest(projectInfo)
+        // .then(res => {          
+        //   if (res.data.message === "Your registration was successful!"){
+        //     history.push('/login');
+        //   }else{
+        //     console.log(res);
+        //     displayError("Something went wrong! Try again!")
+        //   }
+        // })
+        // .catch(err => {
+        //   displayError(err.message);
+        // })
       }else{
-        // displayError("Your email or period are invalid!");
+        displayAlertMessage("Fill out all required fields!", "error");
       }
     }else{
-      displayError("You have to fill out all of the fields!");
+        displayAlertMessage("You have to fill out all of the required fields!", "error");
     }
-  }
+}
 
-  const handleChange = (e) => {
+const handleChange = (e) => {
     const { name, value } = e.currentTarget;
 
     switch(name){
@@ -151,14 +166,6 @@ const displayError = (message) => {
             setQuantity(+value);
         }        
         break;
-    //   case "period":
-    //     setperiod(value);
-    //     if (!validatePass(value)){
-    //       setErrPass(true);
-    //     }else{
-    //       setErrPass(false);
-    //     }
-    //     break;
       default:
         return;
     }
@@ -174,10 +181,10 @@ const displayError = (message) => {
         <Typography component="h1" variant="h5" className="pink">
           and get offers
         </Typography>
-        <form className="form" onSubmit={handleSubmit} noValidate  className="create_project_form">
+        <form onSubmit={handleSubmit} noValidate  className="form create_project_form">
           <Grid container spacing={3} justify="center">
             <Grid item xs={6} sm={3}>
-              <TextField
+            <TextField
                 autoComplete="pname"
                 error={errPN}
                 name="projectName"
@@ -189,12 +196,11 @@ const displayError = (message) => {
                 autoFocus
                 value={projectName}
                 onChange={handleChange}
-              />
+            />
             </Grid>
-            </Grid>
+        </Grid>
             
         <Grid container spacing={3}>
-            
             <Grid item xs={6} sm={3}>
                 <CategorySearch size="medium" variant="outlined" handleSelected={handleSelectCategory} categories={categories} label="Category"/>
             </Grid>
@@ -219,10 +225,10 @@ const displayError = (message) => {
                 <CategorySearch size="medium" variant="outlined" handleSelected={handleSelectPeriod} categories={periodOptions} label="How often?" />
             </Grid>
             <Grid item xs={12} sm={6}>
-                <MultipleSelect width={{width: "450px"}} size="medium" variant="outlined" handleSelected={handleSelectedMaterials} multiOptions={materials} label="Materials" />
+                <MultipleSelect size="medium" variant="outlined" handleSelected={handleSelectedMaterials} multiOptions={materials} label="Materials" />
             </Grid>           
             <Grid item xs={12} sm={6}>
-                <MultipleSelect width={{width: "450px"}} size="medium" variant="outlined" handleSelected={handleSelectedSizes} multiOptions={sizes} label="Sizes" />
+                <MultipleSelect size="medium" variant="outlined" handleSelected={handleSelectedSizes} multiOptions={sizes} label="Sizes" />
             </Grid>
 
           <Grid item xs={12} sm={6} className="min-height">
@@ -231,9 +237,9 @@ const displayError = (message) => {
                 required
                 fullWidth
                 multiline
-                rowsMax={4}
+                rows={4}
                 id="description"
-                label="Decription"
+                label="Decribe your idea!"
                 name="description"
                 autoComplete="desc"
                 error={errDesc}
@@ -261,10 +267,9 @@ const displayError = (message) => {
     </Container>
 
     <Container component="main" maxWidth="sm">
-      <Box mt={6}>
-        { errorMessage !== "" ? 
-          (<Message message={errorMessage} variant="error"/>) : null
-        }
+      <Box mt={0}>
+        <MuiAlert className={ errorMessage ? "fadeIn" : "fadeOut"} elevation={6} variant="filled" severity="error">{errorMessage}</MuiAlert>
+        <MuiAlert className={ successMessage ? "fadeIn" : "fadeOut"} elevation={6} variant="filled" severity="success">{successMessage}</MuiAlert>
       </Box>
     </Container>
     </>

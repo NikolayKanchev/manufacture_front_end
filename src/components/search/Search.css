@@ -1,0 +1,9 @@
+.multiple-width{
+    width: 450px;
+}
+
+@media(max-width: 861px){
+    .multiple-width{
+        width: 408px;
+    }
+}
