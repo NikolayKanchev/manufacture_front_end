@@ -1,43 +1,74 @@
 import axios from 'axios';
 
-const cards = [
-    { 
-        id: "1",
-        title: "FREE",
-        price: "$0",
-        btnText: "See Details",
-        period: "per month",
-        text: "Collect & respond to our reviews for free.",
-        bestValue: false
-    },
-    { 
-        id: "2",
-        title: "Lite",
-        price: "$300",
-        btnText: "See Details",
-        period: "per month",
-        text: "Showcase reviews on your website & clearly demonstrate marketing ROI.",
-        bestValue: false
-    },
-    { 
-        id: "3",
-        title: "Pro",
-        price: "$550",
-        btnText: "See Details",
-        period: "per month",
-        text: "Give your marketing & sales a significant boost with a wide range of customizable tools.",
-        bestValue: true
-    },
-    // { 
-    //     id: "4",
-    //     title: "Enterprise",
-    //     price: "Custom",
-    //     btnText: "Get a quote",
-    //     period: "per month",
-    //     text: "Full access to our Business with superior integrations, data protection & account management.",
-    //     bestValue: false
-    // },
-];
+const cards = {
+    "endUsers" :[
+        { 
+            id: "1",
+            title: "FREE",
+            price: "$0",
+            btnText: "See Details",
+            period: "per month",
+            text: "Collect & respond to our reviews for free.",
+            bestValue: false
+        },
+        { 
+            id: "2",
+            title: "Lite",
+            price: "$300",
+            btnText: "See Details",
+            period: "per month",
+            text: "Showcase reviews on your website & clearly demonstrate marketing ROI.",
+            bestValue: false
+        },
+        { 
+            id: "3",
+            title: "Pro",
+            price: "$550",
+            btnText: "See Details",
+            period: "per month",
+            text: "Give your marketing & sales a significant boost with a wide range of customizable tools.",
+            bestValue: true
+        },
+        // { 
+        //     id: "4",
+        //     title: "Enterprise",
+        //     price: "Custom",
+        //     btnText: "Get a quote",
+        //     period: "per month",
+        //     text: "Full access to our Business with superior integrations, data protection & account management.",
+        //     bestValue: false
+        // },
+    ],
+    "manufacturers" :[
+        { 
+            id: "1",
+            title: "FREE",
+            price: "$0",
+            btnText: "Select This Plan",
+            period: "per month",
+            text: "Collect & respond to our reviews for free.",
+            bestValue: false
+        },
+        { 
+            id: "2",
+            title: "Lite",
+            price: "$300",
+            btnText: "Select This Plan",
+            period: "per month",
+            text: "Showcase reviews on your website & clearly demonstrate marketing ROI.",
+            bestValue: false
+        },
+        { 
+            id: "3",
+            title: "Pro",
+            price: "$550",
+            btnText: "Select This Plan",
+            period: "per month",
+            text: "Give your marketing & sales a significant boost with a wide range of customizable tools.",
+            bestValue: true
+        },
+    ],
+}
 
 const homeInfoCards = [
     {
@@ -958,8 +989,8 @@ export const fetchSubCategories = (category) => {
     return subCategories[category];
 }
 
-export const fetchPlansCards = () => {
-    return cards;
+export const fetchPlansCards = (type) => {
+    return cards[type];
 }
 
 export const fetchHomeInfoCards = () => {

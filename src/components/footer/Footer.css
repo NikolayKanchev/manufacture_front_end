@@ -25,7 +25,8 @@
     min-width: 200px;
 }
 
-.title {
+.footer-title {
+    font-weight: 900;
     color: #212121;
 }
 

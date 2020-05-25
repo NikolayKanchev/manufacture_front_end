@@ -174,7 +174,7 @@ export default function PrimarySearchAppBar() {
     }else if (newValue === 3){
       history.push("/plans");
     }else if (newValue === 4){
-      history.push("/joinAsFactory");
+      history.push("/joinAsManufacturer");
     }
     handleMobileMenuClose();
   }
@@ -223,7 +223,7 @@ export default function PrimarySearchAppBar() {
             <Badge color="secondary">
               <BusinessIcon />
             </Badge>
-          </IconButton>Join as a Factory
+          </IconButton>Join as Manufacturer
       </MenuItem>
       
       
@@ -270,7 +270,7 @@ export default function PrimarySearchAppBar() {
     }else if (newValue === 3){
       history.push("/plans")
     }else if (newValue === 4){
-      history.push("/joinAsFactory")
+      history.push("/joinAsManufacturer")
     }
     setValue(newValue);
   };

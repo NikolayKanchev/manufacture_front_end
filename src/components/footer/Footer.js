@@ -17,7 +17,7 @@ const Footer = (props) =>{
       <div className="flex-container">
         <div className="sub-container">
           <div className="content">
-            <h3 className="title">General</h3>
+            <h3 className="footer-title">General</h3>
             <p>Contact us</p>
             <p>Join as Manufacturer</p>
             <p>Privacy Policy</p>
@@ -26,7 +26,7 @@ const Footer = (props) =>{
         </div>
         <div className="sub-container">
           <div className="content">
-            <h3 className="title">Get to know us</h3>
+            <h3 className="footer-title">Get to know us</h3>
             <p>About us</p>
             <p>Careers</p>
             <p>Blog</p>
@@ -35,7 +35,7 @@ const Footer = (props) =>{
         </div>
         <div className="sub-container">
           <div className="content">
-            <h3 className="title">Make Money with Us</h3>
+            <h3 className="footer-title">Make Money with Us</h3>
             <p>Find manufacturer</p>
             <p>Get direct offers</p>
             <p>How do we help?</p>
@@ -44,7 +44,7 @@ const Footer = (props) =>{
         </div>
         <div className="sub-container">
           <div className="content">
-            <h3 className="title">Follow us</h3>
+            <h3 className="footer-title">Follow us</h3>
             <div className="social">
               <div><Facebook /></div>
               <div><Twitter /></div>

@@ -1,0 +1,20 @@
+.mt-minus-20{
+    margin-top: -20px;
+}
+
+.mt-20px{
+    margin-top: 20px;
+}
+
+.flex-num{
+    display: flex;
+    justify-content: center;
+    height: 30px;
+}
+
+.line{
+    width: 100px;
+    border-bottom: 1px solid #bdbdbd;
+    height: 20px;
+    margin: 0 10px 0 10px;
+}

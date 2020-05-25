@@ -18,7 +18,7 @@ import Projects from './containers/projects/Projects';
 import Plans from './containers/plans/Plans';
 import Login from './containers/login/Login';
 import Register from './containers/register/Register';
-import JoinAsFactory from './containers/joinAsFactory/JoinAsFactory';
+import JoinAsManufacturer from './containers/joinAsManufacturer/JoinAsManufacturer';
 import ResetPass from './containers/resetPass/ResetPass';
 import UpdatePass from './containers/resetPass/UpdatePass';
 import MyAccount from './containers/myAccount/MyAccount';
@@ -45,7 +45,7 @@ class App extends Component {
       <>
       <StateProvider initialState={initialState} reducer={reducer}>
         <div className="App" style={{backgroundColor: "#fafafa"}}>
-          <div className="App" style={{minHeight: "575px"}}>
+          <div className="App" style={{minHeight: "595px"}}>
             <Router history={history}>
               <AppBar appName={appName}/>
               <div style={{marginTop: "60px", paddingTop: "20px"}}>
@@ -54,7 +54,7 @@ class App extends Component {
                     <Route path="/find" component={Find} exact/>
                     <Route path="/projects" component={Projects} exact/>
                     <Route path="/plans" component={Plans} exact/>
-                    <Route path="/joinAsFactory" component={JoinAsFactory} exact/>
+                    <Route path="/joinAsManufacturer" component={JoinAsManufacturer} exact/>
                     <Route path="/login" component={Login} exact/>
                     <Route path="/register" component={Register} exact/>
                     <Route path="/reset-pass" component={ResetPass} exact/>

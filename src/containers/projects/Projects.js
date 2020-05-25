@@ -58,7 +58,6 @@ const Projects = () => {
         <>
         {/* {!logedIn ?  */}
         {logedIn ? 
-
             <>
             {projects ? 
                 <>

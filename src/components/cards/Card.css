@@ -47,6 +47,33 @@
     border: 2px solid #f50057;
 }
 
+/* .selected-plan{
+    height: 90px;
+    width: 245px;
+    min-height: 320px;
+    background-color: #a5d6a7;
+} */
+
+.check-img{
+    padding-top: 10px;
+    opacity: 0.5;
+}
+
+.plan-card{
+    cursor: pointer;
+    width: 244px;
+    min-height: 350px;
+    margin: 40px;
+}
+
+.plan-card :hover{
+    background-color: #eeeeee;
+}
+
+.selected-plan-check{
+    height: 90px;
+}
+
 @media(min-width: 1317px){
     .hidden {
         display: none;
@@ -63,5 +90,9 @@
     }
     .sub-card{
         padding: 5%;
+    }
+
+    .plan-card{
+        margin-bottom: 15px;
     }
 }

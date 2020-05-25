@@ -6,13 +6,13 @@ import './Card.css';
 
 const CardsList = (props) => {
         
-    const {cards, type}= props;
+    const {cards, type, planType}= props;
 
     return (
         <>
             {type === "flex" ? 
                 <>
-                    {cards.map( card => <Card key={card.id} card={card} /> )}
+                    {cards.map( card => <Card type={planType} key={card.id} card={card} /> )}
                     
                     { cards.length > 0 ? (
                         <>

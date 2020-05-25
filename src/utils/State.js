@@ -5,7 +5,9 @@ export const initialState = {
     username: "",
     token: "",
     id: "",
-    categorySelected: false
+    categorySelected: false,
+    manufacturerPlan: "",
+    endUserPlan: ""
 }
   
 export const reducer = (state, action) => {
@@ -28,6 +30,12 @@ export const reducer = (state, action) => {
             state.token = action.token;
             state.id = action.id;
             state.categorySelected = action.categorySelected;
+            return {...state};
+        case "selectManufacturerPlan":   
+            state = action;                     
+            return {...state};
+        case "selectEndUserPlan":   
+            state = action;                     
             return {...state};
         default:
             return initialState;
