@@ -86,7 +86,7 @@ const Find = () => {
                     <>
                         <div className="search-elements">
                             <div className="less-icon"><LessIcon onClick={() => handleMoreOptions(false)}/></div>
-                            <CountrySearch handleSelectCountry={handleSelectCountry} />
+                            <CountrySearch width="180px" mt="3px" handleSelectCountry={handleSelectCountry} />
                             <CategorySearch handleSelected={handleSelectCategory} categories={categories} label="Category"/>
                             <CategorySearch handleSelected={handleSelectSubCategory} categories={subCategories} label="Sub Category" />
                             <CategorySearch handleSelected={handleSelectProduct} categories={products} label="Products"/>

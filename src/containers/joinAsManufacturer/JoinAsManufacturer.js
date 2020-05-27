@@ -1,10 +1,12 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useReduxState } from '../../utils/State';
 
 import CardsList from '../../components/cards/CardsList';
+import Register from '../../components/manufacturer/Register';
+
 import Typography from '@material-ui/core/Typography';
 import { fetchPlansCards } from '../../utils/FetchData';
-import { Card, Button } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import { makeStyles } from '@material-ui/core/styles';
 import history from '../../utils/History';
@@ -36,8 +38,7 @@ const JoinAsFactory = () => {
     const classes = useStyles();
     const [stepper, setStepper] = useState(1);
     const cards = fetchPlansCards("manufacturers");
-    let [ state, dispatch ] = useReduxState();
-    // const chosenPlan = useRef();
+    let [ state ] = useReduxState();
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -57,10 +58,10 @@ const JoinAsFactory = () => {
         history.push("/");
     }
 
-    const handleChosen = (num) => {
-        console.log(num);
+    // const handleChosen = (num) => {
+    //     console.log(num);
 
-    }
+    // }
 
     return (
         <>
@@ -85,7 +86,21 @@ const JoinAsFactory = () => {
 
                 </>: null
             }
-            { state.selectedPlan !== "" ?
+            { stepper === 2 ? 
+                <>
+                    <div className="mt-20">
+                        <Typography gutterBottom variant="h6" component="h2">
+                            We need information about your company
+                        </Typography>
+                    </div>
+                    
+                    <div className="card-list mt-minus-20">
+                        <Register />
+                    </div>
+
+                </>: null
+            }
+            { state.manufacturerPlan !== "" ?
                 <>
                     { stepper <= 2 ? 
                     <div className="flex-company">

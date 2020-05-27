@@ -27,7 +27,7 @@ const useStyles = makeStyles({
 export default function CountrySelect(props) {
   const classes = useStyles();
   let country = "";
-  const { handleSelectCountry, variant, size } = props;
+  const { handleSelectCountry, variant, size, mt, width, required } = props;
 
   const handleChange = (value) => {
     if (country !== value.value){
@@ -39,7 +39,7 @@ export default function CountrySelect(props) {
   return (
     <Autocomplete
       id="country-select-demo"
-      style={{ width: 180, marginTop: "3px" }}
+      style={{ width: width, marginTop: mt }}
       options={countries}
       classes={{
         option: classes.option,
@@ -59,6 +59,7 @@ export default function CountrySelect(props) {
           label="Choose a country"
           variant={variant ? variant : "standard"}
           size={size ? size : "small"}
+          required={ required }
           // required={true}
           // error={true}
           inputProps={{
