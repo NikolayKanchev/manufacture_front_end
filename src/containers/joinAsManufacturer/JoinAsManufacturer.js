@@ -9,7 +9,6 @@ import { fetchPlansCards } from '../../utils/FetchData';
 import { Button } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import { makeStyles } from '@material-ui/core/styles';
-import history from '../../utils/History';
 import './JoinAsManufacturer.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -54,23 +53,12 @@ const JoinAsFactory = () => {
         }
     }
 
-    const handleClickFinish = () => {
-        history.push("/");
-    }
-
-    // const handleChosen = (num) => {
-    //     console.log(num);
-
-    // }
-
     return (
         <>
             <div className="flex-num">
                 <Avatar className={ stepper === 1 ? classes.pink : "" }>1</Avatar>
                 <div className="line"></div>
                 <Avatar className={ stepper === 2 ? classes.pink : "" }>2</Avatar>
-                <div className="line"></div>
-                <Avatar className={ stepper === 3 ? classes.pink : "" }>3</Avatar>
             </div>
             { stepper === 1 ? 
                 <>
@@ -102,15 +90,17 @@ const JoinAsFactory = () => {
             }
             { state.manufacturerPlan !== "" ?
                 <>
-                    { stepper <= 2 ? 
-                    <div className="flex-company">
-                        { stepper === 1 ? 
-                            <div><Button disabled variant="outlined" color="primary" onClick={() => handleClickStepper("back")}>Back</Button></div>:
+                    { stepper < 2 ? 
+                        <div className="flex-company">
+                            { stepper === 1 ? 
+                                <div><Button disabled variant="outlined" color="primary" onClick={() => handleClickStepper("back")}>Back</Button></div>:
+                                <div><Button variant="outlined" color="primary" onClick={() => handleClickStepper("back")}>Back</Button></div>
+                            }
+                            <div><Button variant="outlined" color="primary" onClick={() => handleClickStepper("next")}>Next</Button></div>
+                        </div>:
+                        <div className="flex-company">
                             <div><Button variant="outlined" color="primary" onClick={() => handleClickStepper("back")}>Back</Button></div>
-                        }
-                        <div><Button variant="outlined" color="primary" onClick={() => handleClickStepper("next")}>Next</Button></div>
-                    </div>:
-                    <div><Button variant="outlined" color="primary" onClick={handleClickFinish}>Finish</Button></div>
+                        </div>
                     }
                 </>:null
             }

@@ -7,7 +7,8 @@ export const initialState = {
     id: "",
     categorySelected: false,
     manufacturerPlan: "",
-    endUserPlan: ""
+    endUserPlan: "",
+    isManufacturer: true
 }
   
 export const reducer = (state, action) => {

@@ -104,7 +104,7 @@ export default function PrimarySearchAppBar() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  let [ { logedIn }, dispatch ] = useReduxState();
+  let [ { logedIn, isManufacturer }, dispatch ] = useReduxState();
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -261,16 +261,46 @@ export default function PrimarySearchAppBar() {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
-    if (newValue === 0){
-      history.push("/")
-      }else if (newValue === 1){
-      history.push("/find")
-    }else if (newValue === 2){
-      history.push("/projects")
-    }else if (newValue === 3){
-      history.push("/plans")
-    }else if (newValue === 4){
-      history.push("/joinAsManufacturer")
+    if (logedIn && isManufacturer){
+      switch (newValue) {
+        case 0:
+          history.push("/")
+          break;
+        case 1:
+          history.push("/find-projects")
+          break;
+        case 2:
+          history.push("/products")
+          break;
+        case 3:
+          history.push("/plans")
+          break;
+        // case 4:
+        //   history.push("/joinAsManufacturer")
+        // break;
+        default:
+          break;
+      }
+    }else{
+      switch (newValue) {
+        case 0:
+          history.push("/")
+          break;
+        case 1:
+          history.push("/find")
+          break;
+        case 2:
+          history.push("/projects")
+          break;
+        case 3:
+          history.push("/plans")
+          break;
+        case 4:
+          history.push("/joinAsManufacturer")
+        break;
+        default:
+          break;
+      }
     }
     setValue(newValue);
   };
@@ -301,14 +331,7 @@ export default function PrimarySearchAppBar() {
           <div className={classes.sectionDesktop}>
             
           {/* <div className={classes.grow} /> */}
-            <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-              <Tab label="Home" {...a11yProps(0)}/>
-              <Tab label="Find Factory" {...a11yProps(1)}/>
-              <Tab label="Your Projects" {...a11yProps(2)}/>
-
-              <Tab label="Plans" {...a11yProps(3)}/>
-              <Tab label="Join as Manufacturer" {...a11yProps(4)} />
-            </Tabs>
+            
 
 
             {/* <IconButton aria-label="show 4 new mails" color="inherit">
@@ -321,11 +344,26 @@ export default function PrimarySearchAppBar() {
                 <NotificationsIcon />
               </Badge>
             </IconButton> */}
-            { logedIn === true ? 
+            { logedIn === true && isManufacturer ? 
               <>
-                
+                <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+                  <Tab label="Home" {...a11yProps(0)}/>
+                  <Tab label="Find Projects" {...a11yProps(1)}/>
+                  <Tab label="Your Products" {...a11yProps(2)}/>
+
+                  <Tab label="Plans" {...a11yProps(3)}/>
+                  {/* <Tab label="Join as Manufacturer" {...a11yProps(4)} /> */}
+                </Tabs>
               </>:
               <>
+                <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+                  <Tab label="Home" {...a11yProps(0)}/>
+                  <Tab label="Find Factory" {...a11yProps(1)}/>
+                  <Tab label="Your Projects" {...a11yProps(2)}/>
+
+                  <Tab label="Plans" {...a11yProps(3)}/>
+                  <Tab label="Join as Manufacturer" {...a11yProps(4)} />
+                </Tabs>
               </>  
             }
             

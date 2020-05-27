@@ -55,7 +55,9 @@ const displayError = (message) => {
           firstName: firstName,
           lastName: lastName,
           email: email,
-          password: password
+          password: password,
+          // companyName: companyName,
+          // isManufacturer: false
         }
         
         registerRequest(userInfo)
