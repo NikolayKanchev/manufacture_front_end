@@ -40,7 +40,7 @@ const Projects = () => {
         // if (1){
             fetchData();
         }
-      }, [id, projects, logedIn]);
+      }, [id]);
 
       const handleRequestOffers = async (e, projectId) => {
           e.preventDefault();

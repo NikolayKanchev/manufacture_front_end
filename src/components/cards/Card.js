@@ -62,18 +62,29 @@ export default function MediaCard(props) {
               </Typography>
               <br/>
               <Divider variant="middle" />
-              <div className="selected-plan-check">
-                { (type === "manufacturer" && state.manufacturerPlan === card.id) || (type === "endUser" && state.endUserPlan === card.id) ? 
-                  <>
-                    <img className="check-img" alt="" width="40%" height="70px" src={require('../../images/check.png')} />
-                  </>: null
-                }
+              <div className= "options mh-220">
+                <ul>
+                  { card.options.map((o,i) => 
+                    <li key={i} className="option">
+                      {o}
+                    </li>
+                  )}
+                  </ul>
               </div>
               <Divider variant="middle" />
-              <br/>
+              {state.isManufacturer ?
+                <div className="selected-plan-check">
+                  { (type === "manufacturer" && state.manufacturerPlan === card.id) || (type === "endUser" && state.endUserPlan === card.id) ? 
+                    <>
+                      <img className="check-img" alt="" width="40%" height="70px" src={require('../../images/check.png')} />
+                    </>: null
+                  }
+                </div>: null
+              }
+              {/* <br/>
               <Typography className={classes.minHeight} variant="body2" color="textSecondary" component="p">
                 {card.text}
-              </Typography>
+              </Typography> */}
             </CardContent>
         </Card>
       </div>

@@ -14,7 +14,7 @@ const Plans = () => {
     return (
         <>
             <div className="flex-num"></div>
-            <div className="mt-20">
+            <div>
                 <Typography gutterBottom variant="h6" component="h2">
                         Choose a plan that suits your needs
                 </Typography>

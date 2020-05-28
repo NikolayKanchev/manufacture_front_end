@@ -17,10 +17,6 @@ const Home = () => {
 
     return(
         <>
-            {/* { logedIn !== false ? 
-                <>
-                    You are logged in
-                </> :  */}
             { isManufacturer ? 
             <>
                 <div className="img-container img-transition">
@@ -31,7 +27,6 @@ const Home = () => {
                     <h1> - See projects, who needs manufacturer!</h1>
                     <h1> - Receive direct messages from interested parties!</h1>
                     <h1> - Send direct offers!</h1>
-
                 </div>
 
                 <br></br>
@@ -55,7 +50,9 @@ const Home = () => {
                     </div>
 
                     <br></br>
-                    <Button variant="contained" color="secondary" onClick={() => history.push("/login")}>Get Started</Button>
+                    { logedIn !== false ? <br></br>: 
+                        <Button variant="contained" color="secondary" onClick={() => history.push("/login")}>Get Started</Button>
+                    }
                    
                     <div className="details"></div>
                     <Button variant="outlined" onClick={executeScroll}> More details </Button>

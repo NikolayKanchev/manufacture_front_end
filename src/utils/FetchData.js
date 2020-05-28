@@ -8,7 +8,8 @@ const cards = {
             price: "$0",
             btnText: "See Details",
             period: "per month",
-            text: "Collect & respond to our reviews for free.",
+            options: ["Search for manufacturers - (up to 3 times per month)", "See details about a manufacturer and product it offers - (up to 3 times per month)"],
+            text: "ddddd",
             bestValue: false
         },
         { 
@@ -17,6 +18,7 @@ const cards = {
             price: "$300",
             btnText: "See Details",
             period: "per month",
+            options: ["Search for manufacturers - (unlimited)", "See details about a manufacturer and product it offers - (unlimited)"],
             text: "Showcase reviews on your website & clearly demonstrate marketing ROI.",
             bestValue: false
         },
@@ -26,6 +28,8 @@ const cards = {
             price: "$550",
             btnText: "See Details",
             period: "per month",
+            options: ["Search for manufacturers - (unlimited)", "See details about a manufacturer and product it offers / (unlimited)",
+                        "Send direct messages to manufacturers", "Create projects and et offers for them"],
             text: "Give your marketing & sales a significant boost with a wide range of customizable tools.",
             bestValue: true
         },
@@ -46,6 +50,7 @@ const cards = {
             price: "$0",
             btnText: "Select This Plan",
             period: "per month",
+            options: ["Add Products - make them visible for the rest of the world"],
             text: "Collect & respond to our reviews for free.",
             bestValue: false
         },
@@ -55,6 +60,8 @@ const cards = {
             price: "$300",
             btnText: "Select This Plan",
             period: "per month",
+            options: ["Add Products - make them visible for the rest of the world", "Search for projects / (up to 10 times per month)",
+            "Send offers - (up to 3 times per month)"],
             text: "Showcase reviews on your website & clearly demonstrate marketing ROI.",
             bestValue: false
         },
@@ -64,6 +71,8 @@ const cards = {
             price: "$550",
             btnText: "Select This Plan",
             period: "per month",
+            options: ["Add Products - make them visible for the rest of the world", "Search for projects / (unlimited)",
+            "Send offers - (unlimited)", "Get direct messages and reply to them"],
             text: "Give your marketing & sales a significant boost with a wide range of customizable tools.",
             bestValue: true
         },
@@ -823,7 +832,7 @@ const usersIdeas = [
         userId: "1",
         projects: [
             {
-                id: "0",
+                id: "2",
                 name: "The best project",
                 description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident",
                 category: "Category",
@@ -837,7 +846,7 @@ const usersIdeas = [
                 statusMessage: "Collecting offers",
             },
             {
-                id: "1",
+                id: "3",
                 name: "The best project 2",
                 description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident",
                 category: "Category",
@@ -856,7 +865,7 @@ const usersIdeas = [
         userId: "2",
         projects: [
             {
-                id: "0",
+                id: "4",
                 name: "The best project",
                 description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident",
                 category: "Category",
@@ -870,7 +879,7 @@ const usersIdeas = [
                 statusMessage: "Offers received",
             },
             {
-                id: "1",
+                id: "5",
                 name: "The best project",
                 description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident",
                 category: "Category",
@@ -892,7 +901,7 @@ const projectOffers = [
         projectId: "0",
         offers: [
             { 
-                id: "0",
+                id: "6",
                 offerNumber: "0987654",
                 companyId: "0",
                 companyName: "Bella",
@@ -909,7 +918,7 @@ const projectOffers = [
                 sizes: ["small", "medium", "large"],
             },
             { 
-                id: "1",
+                id: "7",
                 offerNumber: "23456",
                 companyId: "0",
                 companyName: "Deku Stans Ltd",
@@ -931,7 +940,7 @@ const projectOffers = [
         projectId: "1",
         offers: [
             { 
-                id: "0",
+                id: "8",
                 offerNumber: "0987654",
                 companyId: "1",
                 companyName: "Bella",
@@ -948,7 +957,7 @@ const projectOffers = [
                 sizes: ["small", "medium", "large"],
             },
             { 
-                id: "1",
+                id: "9",
                 offerNumber: "23456",
                 companyId: "0",
                 companyName: "Bella",
