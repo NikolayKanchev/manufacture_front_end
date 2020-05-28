@@ -4,7 +4,7 @@ export const initialState = {
     logedIn: false,
     username: "",
     token: "",
-    id: "",
+    id: "1",
     categorySelected: false,
     manufacturerPlan: "",
     endUserPlan: "",

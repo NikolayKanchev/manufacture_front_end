@@ -999,6 +999,41 @@ const options = {
         { id: 6, title: 'Every year' },
         { id: 7, title: 'None of the options' },
       ],
+      colors: [
+        { id: 0, title: 'Red' },
+        { id: 1, title: 'Green' },
+        { id: 2, title: 'Yellow' },
+        { id: 3, title: 'Orange' },
+        { id: 4, title: 'Black' },
+        { id: 5, title: 'White' },
+        { id: 6, title: 'Blue' },
+        { id: 7, title: 'Pink' },
+        { id: 5, title: 'Grey' },
+        { id: 6, title: 'Purple' },
+        { id: 7, title: 'Cian' },
+      ],
+      productType: [
+        { id: 0, title: 'pcs' },
+        { id: 1, title: 'boxes' },
+        { id: 2, title: 'containers' },
+        { id: 3, title: 'liters' },
+        { id: 4, title: 'packages' },
+        { id: 5, title: 'units' },
+        { id: 6, title: 'sets' },
+        { id: 7, title: 'pairs' }
+      ],
+      capacityPeriod: [
+        { id: 0, title: 'Daily' },
+        { id: 1, title: 'Weekly' },
+        { id: 2, title: 'Monthly' },
+        { id: 3, title: 'Early' },
+      ],
+}
+
+export const addProduct = (product, category, subCategory, companyID) => {
+    // console.log(product, category, subCategory, companyID);
+    
+    return searchResults[companyID].categories[category].subCategories[subCategory].products.push(product);
 }
 
 export const requestOffers = (projectId, userId) => {
