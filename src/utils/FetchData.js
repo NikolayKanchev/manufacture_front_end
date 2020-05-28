@@ -128,6 +128,69 @@ const homeInfoCards = [
     },
 ]
 
+const manHomeInfoCards = [
+    {
+        id: "1",
+        title: "Make your company and products visible!",
+        subCards: [
+            {
+                image: require("../images/search.png"),
+                text: 'Select "Products" and add the products, you are producing! Then people can easily find your company by searching for specific product.',
+            },
+        ],
+        hasSteps: false,
+    },
+    {
+        id: "2",
+        title: "See projects, who needs manufacturer!",
+        subCards: [
+            {
+                image: require("../images/select.png"),
+                text: 'In order to see the active projects select "Find Projects" from the menu on the top of the screen!',
+            },
+            {
+                image: require("../images/search.png"),
+                text: "You can search by specifying a product or category of products. You can also search by selecting region, country, category, etc.",
+            },
+        ],
+        hasSteps: true,
+    },
+    {
+        id: "3",
+        title: "Get direct messages from interested parties!",
+        subCards: [
+            {
+                image: require("../images/select.png"),
+                text: 'Select "Messages" in order to see the messages that you have reseived!',
+            },
+            {
+                image: require("../images/faq.png"),
+                text: 'Select "Answear" and type your message!',
+            },
+        ],
+        hasSteps: true
+    },
+    {
+        id: "4",
+        title: "Send direct offers!",
+        subCards: [
+            {
+                image: require("../images/select.png"),
+                text: 'In order to send an offer you have to select "Find Projects" from the menu on the top of the screen!',
+            },
+            {
+                image: require("../images/search.png"),
+                text: "You can search by specifying a product or category of products. You can also search by selecting region, country, category, etc.",
+            },
+            {
+                image: require("../images/list.png"),
+                text: "You'll get a list of projects where you can see general information about each of them. Press \"Send Offer\" if you want to send an offer.",
+            }
+        ],
+        hasSteps: true,
+    },
+]
+
 const categories = [
     { title: 'Food and Baverage'},
     { title: 'Agriculture'},
@@ -969,6 +1032,13 @@ export const getProject = (projectId, userId) => {
 }
 
 export const getProjects = (id) => {
+    if (id === "all"){
+        const projects = [];
+        usersIdeas.forEach(user => {
+            user.projects.forEach(p => projects.push(p));
+        });
+        return projects;
+    }
     return usersIdeas[id].projects;
 }
 
@@ -993,8 +1063,13 @@ export const fetchPlansCards = (type) => {
     return cards[type];
 }
 
-export const fetchHomeInfoCards = () => {
-    return homeInfoCards;
+export const fetchHomeInfoCards = (isManufacturer) => {
+    if (isManufacturer){
+        return manHomeInfoCards;
+    }else{
+         return homeInfoCards;
+    }
+   
 }
 
 export const fetchCreateProjectDesc = () => {

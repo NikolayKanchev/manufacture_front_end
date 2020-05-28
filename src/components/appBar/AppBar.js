@@ -261,7 +261,8 @@ export default function PrimarySearchAppBar() {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
-    if (logedIn && isManufacturer){
+    // if (logedIn && isManufacturer){
+    if (isManufacturer){
       switch (newValue) {
         case 0:
           history.push("/")
@@ -275,9 +276,9 @@ export default function PrimarySearchAppBar() {
         case 3:
           history.push("/plans")
           break;
-        // case 4:
-        //   history.push("/joinAsManufacturer")
-        // break;
+        case 4:
+          history.push("/your-offers")
+        break;
         default:
           break;
       }
@@ -344,7 +345,10 @@ export default function PrimarySearchAppBar() {
                 <NotificationsIcon />
               </Badge>
             </IconButton> */}
-            { logedIn === true && isManufacturer ? 
+
+
+            {/* { logedIn === true && isManufacturer ?  */}
+            { isManufacturer ? 
               <>
                 <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
                   <Tab label="Home" {...a11yProps(0)}/>
@@ -352,6 +356,7 @@ export default function PrimarySearchAppBar() {
                   <Tab label="Your Products" {...a11yProps(2)}/>
 
                   <Tab label="Plans" {...a11yProps(3)}/>
+                  <Tab label="Your Offers" {...a11yProps(4)}/>
                   {/* <Tab label="Join as Manufacturer" {...a11yProps(4)} /> */}
                 </Tabs>
               </>:
