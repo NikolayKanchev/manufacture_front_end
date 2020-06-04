@@ -10,9 +10,9 @@ import YouTube from '@material-ui/icons/YouTube';
 import './Footer.css';
 
 
-const Footer = (props) =>{
+const Footer = ({appName}) =>{
   return (
-    <>
+    <div data-testid="footer">
     <div className="main-container">
       <div className="flex-container">
         <div className="sub-container">
@@ -58,13 +58,13 @@ const Footer = (props) =>{
         <Typography variant="body2" color="textSecondary" align="center" >
           {'Copyright © '}
           <MatLink color="inherit" href="https://material-ui.com/">
-            {props.company}
+            {appName}
           </MatLink>{' '}
           {new Date().getFullYear()}
           {'.'}
         </Typography>
       </div>
-    </>
+    </div>
   );
 }
 

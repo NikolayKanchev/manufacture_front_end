@@ -6,7 +6,7 @@ const cards = {
             id: "1",
             title: "FREE",
             price: "$0",
-            btnText: "See Details",
+            // btnText: "See Details",
             period: "per month",
             options: ["Search for manufacturers - (up to 3 times per month)", "See details about a manufacturer and product it offers - (up to 3 times per month)"],
             text: "ddddd",
@@ -898,7 +898,7 @@ const usersIdeas = [
 
 const projectOffers = [
     { 
-        projectId: "0",
+        projectId: "4",
         offers: [
             { 
                 id: "6",
@@ -1067,8 +1067,8 @@ export const getOptions = (type) => {
     return options[type];
 }
 
-export const getOffers = (projectId) => {  
-    return projectOffers[projectId].offers;
+export const getOffers = (projectId) => {    
+    return projectOffers["0"].offers;
 }
 
 export const getProject = (projectId, userId) => {

@@ -75,7 +75,7 @@ class App extends Component {
               </div>
             </Router>
           </div>
-          <Footer company={appName}/>
+          <Footer appName={appName}/>
         </div>
 
       </StateProvider>
