@@ -53,7 +53,7 @@ const SignUp = () => {
     const handleSubmit = (e) => {
       e.preventDefault();
 
-      // if (!validateName(companyName)) { setErrCompanyName(true); }
+      if (!validateName(companyName)) { setErrCompanyName(true); }
       if (companyName === "") { setErrCompanyName(true); }
       if (idNum === "") { setErrIdNum(true); }
       if (address === "") { setErrAddress(true); }

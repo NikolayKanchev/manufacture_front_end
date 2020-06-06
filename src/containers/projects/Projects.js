@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 
 import { useReduxState } from '../../utils/State';
 import { getProjects } from '../../utils/FetchData';
-import { fetchCreateProjectDesc, requestOffers } from '../../utils/FetchData';
+import { fetchCreateProjectDesc, requestOffers, addCategory } from '../../utils/FetchData';
 import history from '../../utils/History';
 
 import AddIcon from '@material-ui/icons/Add';
@@ -23,30 +23,26 @@ const useStyles = makeStyles((theme) =>
 
 const Projects = () => {
     const [projects, setProjects] = useState();
-    const [ {id, logedIn} ] = useReduxState();
+    const [ {user, logedIn} ] = useReduxState();
     const classes = useStyles();
 
     const card = fetchCreateProjectDesc();
 
     useEffect(() => {
         window.scrollTo(0, 0);
+        let isSubscribed = true;
 
-        async function fetchData() {
-            const result = await getProjects(id);
-            // const result = await getProjects(1);
-            setProjects(result);
+        if(isSubscribed && logedIn){
+            // addCategory()
+            getProjects(user.id).then(p => setProjects(p));
         }
-
-        if (logedIn){
-        // if (1){
-            fetchData();
-        }
-      }, [id, projects, logedIn]);
+        return () => { isSubscribed = false }
+    },[]); 
 
       const handleRequestOffers = async (e, projectId) => {
           e.preventDefault();
           
-          const res = await requestOffers(projectId, id);
+          const res = await requestOffers(projectId, user.id);
           if (res.status === 200){
                 const newProjects = [...projects];
                 newProjects[projectId] = res.project;
@@ -72,7 +68,7 @@ const Projects = () => {
                                             <div className="i-column flex-company">
                                                 <div className="desc">
                                                     <div className="i-column-title">Description</div>
-                                                    <div className="small-italic">{p.description}</div>
+                                                    <div className="small-italic">{p.desc}</div>
                                                 </div>
                                             </div>
                                             <div className="i-column">
@@ -80,7 +76,7 @@ const Projects = () => {
                                                 <div className="small-italic blue">{p.category} / <span className="pink">{p.subCategory}</span></div>
                                                 <br></br>
                                                 <div className="i-column-title">Materials</div>
-                                                <div className="flex-company">
+                                                {/* <div className="flex-company">
                                                     { p.materials.map((m, i) => 
                                                         <div key={i}>
                                                             {p.materials.length - 1 === i? 
@@ -89,10 +85,10 @@ const Projects = () => {
                                                             }
                                                         </div>
                                                     )}
-                                                </div>
+                                                </div> */}
                                                 <br></br>
                                                 <div className="i-column-title">Sizes</div>
-                                                <div className="flex-company">
+                                                {/* <div className="flex-company">
                                                     { p.sizes.map((s, i) => 
                                                         <div key={i}>
                                                             {p.sizes.length - 1 === i? 
@@ -101,7 +97,7 @@ const Projects = () => {
                                                             }
                                                         </div>
                                                     )} 
-                                                </div>
+                                                </div> */}
                                             </div>
                                             <div className="i-column">
                                                 <div className="i-column-title">Desired Quantity</div>
@@ -112,12 +108,12 @@ const Projects = () => {
                                                 <br></br>
                                                 <div className="i-column-title">Status</div>
                                                 <div className="small-italic blue">{p.statusMessage}</div>
-                                                { p.offersRequested && p.offersReceived ? 
+                                                {/* { p.offersRequested && p.offersReceived ? 
                                                    <>
                                                         <br></br>
                                                         <div><Button variant="outlined" color="secondary" onClick={() => history.push("/seeOffers/" + p.id)}>See Offers</Button></div>
                                                    </>:null
-                                                }
+                                                } */}
                                                 { !p.offersRequested ? 
                                                    <>
                                                         <br></br>

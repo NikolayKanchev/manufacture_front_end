@@ -26,7 +26,7 @@ const LoginPage = (props) => {
   const [errPass, setErrPass] = useState(false);
   const [errEmail, setErrEmail] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  let [ state , dispatch ] = useReduxState();
+  let [ , dispatch ] = useReduxState();
 
   useEffect(() => {
       window.scrollTo(0, 0);
@@ -48,64 +48,16 @@ const LoginPage = (props) => {
       loginRequest(email, password)
       .then(res => {
         if (res.status === 200){
-          // console.log(res.data.usersData);
-          
+          const usersData = res.data.usersData;    
+          const userType = usersData.userType;
 
-// userType: "manufacturer"
-// company:
-    // address: "Somewhere"
-    // country: "USA"
-    // id: 4
-    // img: "https://s3.amazonaws.com/uifaces/faces/twitter/flexrs/128.jpg"
-    // name: "Tesla"
-    // regNumber: "23455432"
-// planId: 1
-// user:
-    // baseUserId: 9
-    // companyId: 4
-    // contactPerson: "Elon Musk"
-    // email: "nikolay.kanchev@yahoo.com"
-    // id: 2
-
-
-// userType: "company"
-// company:
-    // address: "Somewhere"
-    // country: "USA"
-    // id: 5
-    // img: "https://s3.amazonaws.com/uifaces/faces/twitter/flexrs/128.jpg"
-    // name: "Tesla"
-    // regNumber: "23455432"
-// planId: 1
-// user:
-    // baseUserId: 12
-    // companyId: 5
-    // email: "nikolaj.kanchev@gmail.com"
-    // id: 5
-    // name: "Nikolay Kanchev"
-
-
-// userType: "people"
-// planId: 1
-// user:
-    // baseUserId: 10
-    // companyId: null
-    // email: "d.a.kancheva@gmail.com"
-    // id: 3
-    // name: "Dilyana Kancheva"
-          const usersData = res.data.usersData;
-
-          const userType = res.data.userType;
-          const username = (userType === "people" ? usersData.user.name : usersData.company.name);
+          const username = (userType === "people" ? usersData.name : usersData.company.name);
           const token = res.data.token;
           const isManufacturer = (userType === "manufacturer" ? true : false);
           const company = (userType === "people" ? undefined : usersData.company);
           const user = usersData.user;
 
-          // dispatch({ type: "updateUser", logedIn: true, username, token, id: res.data.userId });
           dispatch({ type: "updateUser", userType, logedIn: true, username, token, isManufacturer, company, user });
-          console.log(state);
-          
           history.goBack();
         }else{
           displayError("Something went wrong! Try again!")
