@@ -130,7 +130,9 @@ export default function PrimarySearchAppBar() {
     if (newValue === 1){
       history.push("/myAccount");
     }else if (newValue === 2){
-      dispatch({ type: "logoutUser", logedIn: false, username: "", token: "", id: "" });
+      dispatch({ type: "logoutUser", userType: "", logedIn: false, 
+                username: "", token: "", isManufacturer: false, 
+                company: undefined, user: undefined });
       history.push("/login");
     }
     handleMenuClose();

@@ -1060,22 +1060,16 @@ export const updatePassRequest = async (password, token) => {
 }
 
 export const registerRequest = async (userInfo) => {
-    const data = {
-        ...userInfo,
-        userType: "company", // people, company, manufacturer
-        planId : 1, // the manufacturer might choose another plan
-        name: "Tesla", regNumber: "23455432", address: "Somewhere", country: "USA", img: "https://s3.amazonaws.com/uifaces/faces/twitter/flexrs/128.jpg",
-        contactPerson: "Elon Musk" // only for manufacturer
-    }
-    const res = await axios.post("http://localhost:4000/users/signup", data);    
+    const res = await axios.post("http://localhost:4000/users/signup", userInfo);
+    console.log(res.data);
     return res;
 }
 
 export const loginRequest = async (email, password) => {
     const res = await axios.post("http://localhost:4000/users/login", { "email": email, "password": password });
-    // console.log(res.data.data);
     return res;
 }
+
 
 // export const fetchChildren = async (token: string) => {
 //     const res = await axios.get("http://localhost:4000/children", authorization(token));

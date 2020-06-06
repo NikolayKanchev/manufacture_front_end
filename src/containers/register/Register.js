@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 import Message from '../../components/message/Message';
+import CountrySearch from '../../components/search/Country';
 import { validateEmail, validatePass, validateName } from '../../utils/Validators';
 import history from '../../utils/History';
 
@@ -24,15 +25,31 @@ const [firstName, setFirstName] = useState("");
 const [lastName, setLastName] = useState("");
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
+const [isCompany, setIsCompany] = useState(false);
+const [companyName, setcompanyName] = useState("");
+const [idNum, setIdNum] = useState("");
+const [address, setAddress] = useState("");
+const [phone, setPhone] = useState("");
+
+const [errPhone, setErrPhone] = useState(false);
 const [errFN, setErrFN] = useState(false);
 const [errLN, setErrLN] = useState(false);
 const [errEmail, setErrEmail] = useState(false);
 const [errPass, setErrPass] = useState(false);
+const [errCN, setErrCompanyName] = useState(false);
+const [errIdNum, setErrIdNum] = useState(false);
+const [errAddress, setErrAddress] = useState(false);
 const [errorMessage, setErrorMessage] = useState("");
+
+const country = useRef();
 
 useEffect(() => {
   window.scrollTo(0, 0);
-});
+}, []);
+
+const handleSelectCountry = (selected) => {
+  country.current = selected;
+}
 
 const displayError = (message) => {
     setErrorMessage(message);
@@ -48,36 +65,63 @@ const displayError = (message) => {
     if (email === "") { setErrEmail(true); }
     if (password === "") { setErrPass(true); }
 
-    if(firstName !== "" && lastName !== "" && email !== "" && password !== ""){      
-      if (!errFN && !errLN && !errEmail && ! errPass){
-
-        const userInfo = {
-          firstName: firstName,
-          lastName: lastName,
-          email: email,
-          password: password,
-          // companyName: companyName,
-          // isManufacturer: false
-        }
-        
-        registerRequest(userInfo)
-        .then(res => {          
-          if (res.data.message === "Your registration was successful!"){
-            history.push('/login');
-          }else{
-            console.log(res);
-            displayError("Something went wrong! Try again!")
-          }
-        })
-        .catch(err => {
-          displayError(err.message);
-        })
-      }else{
-        displayError("Your email or password are invalid!");
+    if (!isCompany){
+      if (firstName === "" || lastName === "" || email === "" || password === "" || errFN || errLN || errEmail || errPass ){
+        displayError("You have to fill out all of the required fields!");
+        return;
       }
-    }else{
-      displayError("You have to fill out all of the fields!");
     }
+
+    if (isCompany){
+      if (firstName === "" || lastName === "" || email === "" || password === "" || errFN || errLN || errEmail || errPass || 
+      companyName === "" || idNum === "" || address === "" || country === "" || phone === "" || errCN || errIdNum || errAddress || errPhone ){
+       
+        if (companyName === "") { setErrCompanyName(true); }
+        if (idNum === "") { setErrIdNum(true); }
+        if (address === "") { setErrAddress(true); }
+        if (email === "") { setErrEmail(true); }
+        if (phone === "") { setErrPhone(true); }
+        if (password === "") { setErrPass(true); }
+        displayError("You have to fill out all of the required fields!");
+        return;
+      }
+    }
+        
+    const userInfo = {};
+
+    if (!isCompany){
+      userInfo.firstName = firstName;
+      userInfo.lastName = lastName;
+      userInfo.email = email;
+      userInfo.password = password;
+      userInfo.planId = 1;
+      userInfo.userType = "people";
+    }else{
+      userInfo.firstName = firstName;
+      userInfo.lastName = lastName;
+      userInfo.email = email;
+      userInfo.password = password;
+      userInfo.planId = 1;
+      userInfo.name = companyName;
+      userInfo.regNumber = idNum;
+      userInfo.address = address;
+      userInfo.country = country.current;
+      userInfo.img = "";
+      userInfo.phone = phone;
+      userInfo.userType = "company";
+    }
+            
+    registerRequest(userInfo)
+    .then(res => {          
+      if (res.data.message === "Your registration was successful!"){
+        history.push('/login');
+      }else{
+        displayError("Something went wrong! Try again!")
+      }
+    })
+    .catch(err => {
+      displayError(err.message);
+    })
   }
   const handleChange = (e) => {
     const { name, value } = e.currentTarget;
@@ -115,10 +159,46 @@ const displayError = (message) => {
           setErrPass(false);
         }
         break;
+      case "companyName":
+        setcompanyName(value);
+        if (!validateName(value)){
+          setErrCompanyName(true);
+        }else{
+          setErrCompanyName(false);
+        }
+        break;
+      case "idNum":
+        setIdNum(value);
+        if (!validateName(value)){
+          setErrIdNum(true);
+        }else{
+          setErrIdNum(false);
+        }
+        break;
+      case "address":
+        setAddress(value);
+        if (!validateName(value)){
+          setErrAddress(true);
+        }else{
+          setErrAddress(false);
+        }
+        break;
+      case "phone":
+        setPhone(value);
+        if (!validateName(value)){
+          setErrPhone(true);
+        }else{
+          setErrPhone(false);
+        }
+        break;
       default:
         return;
     }
-  } 
+  }
+
+  const handleIsCompanySelected = (event) => {
+    setIsCompany(event.target.checked)       
+  }
 
   return (
     <>
@@ -192,10 +272,79 @@ const displayError = (message) => {
             </Grid>
             <Grid item xs={12}>
               <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label= "I want to receive inspiration, marketing promotions and updates via email."
+                control={<Checkbox value={isCompany} color="primary" onClick={handleIsCompanySelected}/>}
+                label= "I am representing a company."
               />
             </Grid>
+            { isCompany ? 
+              <div className="when-company">
+                <Grid container spacing={2} justify={"center"}>
+                  <Grid item xs={12} sm={12}>
+                    <TextField
+                      autoComplete="companyName"
+                      error={errCN}
+                      name="companyName"
+                      variant="outlined"
+                      required
+                      fullWidth
+                      id="companyName"
+                      label="Company Name"
+                      autoFocus
+                      value={companyName}
+                      onChange={handleChange}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={12}>
+                    <TextField
+                      autoComplete="idNum"
+                      error={errIdNum}
+                      name="idNum"
+                      variant="outlined"
+                      required
+                      fullWidth
+                      id="idNum"
+                      label="Company ID number"
+                      autoFocus
+                      value={idNum}
+                      onChange={handleChange}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={12}>
+                    <CountrySearch required={true} width="100%" variant="outlined" size="medium" handleSelectCountry={handleSelectCountry} />
+                  </Grid>
+                  <Grid item xs={12} sm={12}>
+                    <TextField
+                      autoComplete="address"
+                      error={errAddress}
+                      name="address"
+                      variant="outlined"
+                      required
+                      fullWidth
+                      id="address"
+                      label="Address"
+                      autoFocus
+                      value={address}
+                      onChange={handleChange}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={12}>
+                    <TextField
+                      variant="outlined"
+                      required
+                      fullWidth
+                      id="phone"
+                      label="Phone"
+                      name="phone"
+                      autoComplete="phone"
+                      error={errPhone}
+                      value={phone}
+                      onChange={handleChange}
+                    />
+                  </Grid>
+              </Grid>
+              </div>
+              : null
+            }
           </Grid>
           <Button
             type="submit"

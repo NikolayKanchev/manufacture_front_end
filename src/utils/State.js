@@ -1,29 +1,31 @@
 import React, { useReducer, useContext } from 'react';
 
 export const initialState = {
+    userType: "",
     logedIn: false,
     username: "",
     token: "",
-    id: "1",
+    isManufacturer: false,
+    company: undefined,
+    user: undefined,
     categorySelected: false,
     manufacturerPlan: "",
     endUserPlan: "",
-    isManufacturer: false
 }
-  
+
 export const reducer = (state, action) => {
     switch (action.type) {
-        case "updateUser": 
-            state.logedIn = action.logedIn;           
+        case "updateUser":
+            state.userType = action.userType;
+            state.logedIn = action.logedIn;          
             state.username = action.username;
             state.token = action.token;
-            state.id = action.id;
+            state.isManufacturer = action.isManufacturer;
+            state.company = action.company;
+            state.user = action.user;
             return {...state};
         case "logoutUser":
-            state.logedIn = action.logedIn;           
-            state.username = action.username;
-            state.token = action.token;
-            state.id = action.id;
+            state = action;                     
             return {...state};
         case "updateSelectedCategory":
             state.logedIn = action.logedIn;           

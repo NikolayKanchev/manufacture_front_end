@@ -33,7 +33,6 @@ const SignUp = () => {
   const [errConPerson, setErrConPerson] = useState(false);
   const [errPass, setErrPass] = useState(false);
 
-  // const [errorMessage, setErrorMessage] = useState("");
   const errorMessage = useRef("");
   const country = useRef();
 
@@ -54,7 +53,7 @@ const SignUp = () => {
     const handleSubmit = (e) => {
       e.preventDefault();
 
-      if (!validateName(companyName)) { setErrCompanyName(true); }
+      // if (!validateName(companyName)) { setErrCompanyName(true); }
       if (companyName === "") { setErrCompanyName(true); }
       if (idNum === "") { setErrIdNum(true); }
       if (address === "") { setErrAddress(true); }
@@ -67,29 +66,23 @@ const SignUp = () => {
         if (!errCN && !errIdNum  && !errAddress && !errEmail && !errPhone  && !errConPerson && !errPass){
 
           const userInfo = {
-            firstName: "contact person [0]",
-            lastName: "contact person [1]",
-            email: email,
-            password: password,
-            // companyName: companyName,
-            // isManufacturer: true
+            email,
+            password,
+            planId: manufacturerPlan,
+            name: companyName,
+            regNumber: idNum,
+            address,
+            country: country.current,
+            phone,
+            img: "",
+            userType: "manufacturer",
+            contactPerson: conPerson
           }
 
           registerRequest(userInfo)
           .then(res => {          
             if (res.data.message === "Your registration was successful!"){
-              const manProfile = {
-                manID: "from response",
-                regNumber: idNum,
-                address: address,
-                phone: phone,
-                conPerson: conPerson,
-                img: " uploaded",
-                manPlan: manufacturerPlan
-              }
 
-              // console.log(res.data);
-              console.log(manProfile);
               history.push('/login');
             }else{
               console.log(res);
