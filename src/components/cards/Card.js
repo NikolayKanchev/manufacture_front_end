@@ -21,6 +21,7 @@ export default function MediaCard(props) {
   const classes = useStyles();
   const { card, type } = props;
   let [ state, dispatch ] = useReduxState();
+  const cardOptions = card.options.split(',');
 
   const handleSelected = (num) => {
     switch(type){
@@ -33,7 +34,6 @@ export default function MediaCard(props) {
       default:
         return
     }
-    // dispatch({ type: "selectManufacturerPlan", ...state, selectedPlan: num});
   }
 
   return (
@@ -58,13 +58,13 @@ export default function MediaCard(props) {
                 {card.price}
               </Typography>
               <Typography variant="subtitle1" color="textSecondary" component="p">
-                {card.period}
+                {card.currency} / <span className="period">{card.period}</span>
               </Typography>
               <br/>
               <Divider variant="middle" />
-              <div className= "options mh-220">
+              <div className= "options mh-150">
                 <ul>
-                  { card.options.map((o,i) => 
+                  { cardOptions.map((o,i) => 
                     <li key={i} className="option">
                       {o}
                     </li>
@@ -72,19 +72,15 @@ export default function MediaCard(props) {
                   </ul>
               </div>
               <Divider variant="middle" />
-              {state.isManufacturer ?
+              { (state.isManufacturer && state.logedIn) || type === "manufacturer" ?
                 <div className="selected-plan-check">
                   { (type === "manufacturer" && state.manufacturerPlan === card.id) || (type === "endUser" && state.endUserPlan === card.id) ? 
                     <>
-                      <img className="check-img" alt="" width="40%" height="70px" src={require('../../images/check.png')} />
+                      <img className="check-img" alt="" width="20%" height="35px" src={require('../../images/check.png')} />
                     </>: null
                   }
                 </div>: null
               }
-              {/* <br/>
-              <Typography className={classes.minHeight} variant="body2" color="textSecondary" component="p">
-                {card.text}
-              </Typography> */}
             </CardContent>
         </Card>
       </div>

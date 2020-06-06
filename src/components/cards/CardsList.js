@@ -6,7 +6,7 @@ import './Card.css';
 
 const CardsList = (props) => {
         
-    const {cards, type, planType}= props;
+    const {cards, type, planType}= props;    
 
     return (
         <>

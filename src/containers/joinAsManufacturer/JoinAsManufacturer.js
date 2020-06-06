@@ -36,12 +36,19 @@ const useStyles = makeStyles((theme) => ({
 const JoinAsFactory = () => {
     const classes = useStyles();
     const [stepper, setStepper] = useState(1);
-    const cards = fetchPlansCards("manufacturers");
     let [ state ] = useReduxState();
+
+    const [ cards, setCards ] = useState([]);
 
     useEffect(() => {
         window.scrollTo(0, 0);
-    });    
+        let isSubscribed = true;
+
+        if(isSubscribed){
+            fetchPlansCards("manufacturer").then(c => setCards(c));
+        }
+        return () => { isSubscribed = false }
+    },[]);     
 
     const handleClickStepper = (type) => {
         if (type === "next"){

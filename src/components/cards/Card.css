@@ -71,16 +71,20 @@
 }
 
 .selected-plan-check{
-    min-height: 90px;
+    min-height: 50px;
 }
 
 .options{
-    font-size: 14px;
+    font-size: 12px;
     text-align: left;
 }
 
-.mh-220{
-    min-height: 220px;
+.mh-150{
+    min-height: 150px;
+}
+
+.period{
+    font-size: 12px;
 }
 
 .option{

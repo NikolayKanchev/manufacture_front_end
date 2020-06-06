@@ -1,84 +1,5 @@
 import axios from 'axios';
 
-const cards = {
-    "endUsers" :[
-        { 
-            id: "1",
-            title: "FREE",
-            price: "$0",
-            // btnText: "See Details",
-            period: "per month",
-            options: ["Search for manufacturers - (up to 3 times per month)", "See details about a manufacturer and product it offers - (up to 3 times per month)"],
-            text: "ddddd",
-            bestValue: false
-        },
-        { 
-            id: "2",
-            title: "Lite",
-            price: "$300",
-            btnText: "See Details",
-            period: "per month",
-            options: ["Search for manufacturers - (unlimited)", "See details about a manufacturer and product it offers - (unlimited)"],
-            text: "Showcase reviews on your website & clearly demonstrate marketing ROI.",
-            bestValue: false
-        },
-        { 
-            id: "3",
-            title: "Pro",
-            price: "$550",
-            btnText: "See Details",
-            period: "per month",
-            options: ["Search for manufacturers - (unlimited)", "See details about a manufacturer and product it offers / (unlimited)",
-                        "Send direct messages to manufacturers", "Create projects and et offers for them"],
-            text: "Give your marketing & sales a significant boost with a wide range of customizable tools.",
-            bestValue: true
-        },
-        // { 
-        //     id: "4",
-        //     title: "Enterprise",
-        //     price: "Custom",
-        //     btnText: "Get a quote",
-        //     period: "per month",
-        //     text: "Full access to our Business with superior integrations, data protection & account management.",
-        //     bestValue: false
-        // },
-    ],
-    "manufacturers" :[
-        { 
-            id: "1",
-            title: "FREE",
-            price: "$0",
-            btnText: "Select This Plan",
-            period: "per month",
-            options: ["Add Products - make them visible for the rest of the world"],
-            text: "Collect & respond to our reviews for free.",
-            bestValue: false
-        },
-        { 
-            id: "2",
-            title: "Lite",
-            price: "$300",
-            btnText: "Select This Plan",
-            period: "per month",
-            options: ["Add Products - make them visible for the rest of the world", "Search for projects / (up to 10 times per month)",
-            "Send offers - (up to 3 times per month)"],
-            text: "Showcase reviews on your website & clearly demonstrate marketing ROI.",
-            bestValue: false
-        },
-        { 
-            id: "3",
-            title: "Pro",
-            price: "$550",
-            btnText: "Select This Plan",
-            period: "per month",
-            options: ["Add Products - make them visible for the rest of the world", "Search for projects / (unlimited)",
-            "Send offers - (unlimited)", "Get direct messages and reply to them"],
-            text: "Give your marketing & sales a significant boost with a wide range of customizable tools.",
-            bestValue: true
-        },
-    ],
-}
-
 const homeInfoCards = [
     {
         id: "1",
@@ -1103,8 +1024,11 @@ export const fetchSubCategories = (category) => {
     return subCategories[category];
 }
 
-export const fetchPlansCards = (type) => {
-    return cards[type];
+export const fetchPlansCards = async (type) => {    
+    const res = await axios.get("http://localhost:4000/plans/" + type );
+    const cards = [];
+    Object.keys(res.data).forEach(key => cards.push(res.data[key]));   
+    return cards;
 }
 
 export const fetchHomeInfoCards = (isManufacturer) => {
@@ -1113,7 +1037,6 @@ export const fetchHomeInfoCards = (isManufacturer) => {
     }else{
          return homeInfoCards;
     }
-   
 }
 
 export const fetchCreateProjectDesc = () => {
@@ -1124,15 +1047,6 @@ const authorization = (token) => {
     return { headers: {'Authorization': `Bearer ${token}`}}
 };
 
-export const registerRequest = async (userInfo) => {
-    const res = await axios.post("http://localhost:4000/users/signup", userInfo);
-    return res;
-}
-
-export const loginRequest = async (email, password) => {
-    const res = await axios.post("http://localhost:4000/users/login", { "email": email, "password": password });
-    return res;
-}
 
 export const resetPassRequest = async (email) => {
     const res = await axios.post("http://localhost:4000/users/resetPass", { email: email });
@@ -1142,6 +1056,24 @@ export const resetPassRequest = async (email) => {
 export const updatePassRequest = async (password, token) => {
     const res = await axios.post("http://localhost:4000/users/updatePass", { password: password }, authorization(token));
     alert(res)
+    return res;
+}
+
+export const registerRequest = async (userInfo) => {
+    const data = {
+        ...userInfo,
+        userType: "company", // people, company, manufacturer
+        planId : 1, // the manufacturer might choose another plan
+        name: "Tesla", regNumber: "23455432", address: "Somewhere", country: "USA", img: "https://s3.amazonaws.com/uifaces/faces/twitter/flexrs/128.jpg",
+        contactPerson: "Elon Musk" // only for manufacturer
+    }
+    const res = await axios.post("http://localhost:4000/users/signup", data);    
+    return res;
+}
+
+export const loginRequest = async (email, password) => {
+    const res = await axios.post("http://localhost:4000/users/login", { "email": email, "password": password });
+    // console.log(res.data.data);
     return res;
 }
 
