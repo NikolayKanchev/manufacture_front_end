@@ -121,27 +121,6 @@ const manHomeInfoCards = [
     },
 ]
 
-const categories = [
-    { title: 'Food and Baverage'},
-    { title: 'Agriculture'},
-    { title: 'Apparel'},
-    { title: 'Accessories'},
-    { title: 'Leather Product'},
-    { title: 'Jewelry, Eyewear, Wach'},
-    { title: 'Auto, Transport, Accessories'},
-    { title: 'Shoes, Bags & Accessories'},
-    { title: 'Electronics'},
-    { title: 'Home Appliance'},
-    { title: 'Protection & Security'},
-    { title: 'Electrical Components, Equipment & Telecoms'},
-    { title: 'Gifts, Sports & Toys'},
-    { title: 'Health & Beauty'},
-    { title: ''},
-    { title: ''},
-
-
-];
-
 const searchResults = [
     { 
         id: "0", 
@@ -618,34 +597,34 @@ const projectOffers = [
 
 const options = {
     materials: [
-      { id: 0, title: 'Plastic' },
-      { id: 1, title: 'Metal' },
-      { id: 2, title: 'Iron' },
-      { id: 3, title: 'Textil' },
+      { id: 0, name: 'Plastic' },
+      { id: 1, name: 'Metal' },
+      { id: 2, name: 'Iron' },
+      { id: 3, name: 'Textil' },
     ],
     sizes: [
-        { id: 0, title: 'small' },
-        { id: 1, title: 'medium' },
-        { id: 2, title: 'large' },
-        { id: 3, title: 'xl' },
-        { id: 4, title: 'xxl' },
-        { id: 5, title: 'xxxl' },
-        { id: 6, title: '1 kg' },
-        { id: 7, title: '2 kg' },
-        { id: 8, title: '3 kg' },
-        { id: 9, title: '1 l' },
-        { id: 10, title: '2 l' },
-        { id: 11, title: '3 l' },
+        { id: 0, name: 'small' },
+        { id: 1, name: 'medium' },
+        { id: 2, name: 'large' },
+        { id: 3, name: 'xl' },
+        { id: 4, name: 'xxl' },
+        { id: 5, name: 'xxxl' },
+        { id: 6, name: '1 kg' },
+        { id: 7, name: '2 kg' },
+        { id: 8, name: '3 kg' },
+        { id: 9, name: '1 l' },
+        { id: 10, name: '2 l' },
+        { id: 11, name: '3 l' },
       ],
     period: [
-        { id: 0, title: 'Just once' },
-        { id: 1, title: 'Every week' },
-        { id: 2, title: 'Every 2 weeks' },
-        { id: 3, title: 'Every month' },
-        { id: 4, title: 'Every 3 months' },
-        { id: 5, title: 'Every halv an year' },
-        { id: 6, title: 'Every year' },
-        { id: 7, title: 'None of the options' },
+        { id: 0, name: 'Just once' },
+        { id: 1, name: 'Every week' },
+        { id: 2, name: 'Every 2 weeks' },
+        { id: 3, name: 'Every month' },
+        { id: 4, name: 'Every 3 months' },
+        { id: 5, name: 'Every halv an year' },
+        { id: 6, name: 'Every year' },
+        { id: 7, name: 'None of the options' },
       ],
       colors: [
         { id: 0, title: 'Red' },
@@ -683,7 +662,7 @@ const API = "http://localhost:4000/";
 export const addProduct = (product, category, subCategory, companyID) => {
     // console.log(product, category, subCategory, companyID);
     
-    return searchResults[companyID].categories[category].subCategories[subCategory].products.push(product);
+    // return searchResults[companyID].categories[category].subCategories[subCategory].products.push(product);
 }
 
 export const requestOffers = (projectId, userId) => {
@@ -693,14 +672,26 @@ export const requestOffers = (projectId, userId) => {
     return { status: 200, message: "Offers requested", project: project }
 }
 
-export const createProject = (project, userId) => {
-    const newProject = {
-        id: "" + usersIdeas[userId].projects.length,
-        ...project
-    }
+export const  fetchProductTypes = async (subCatId) => {
+    const products = [];
+    const res = await axios.get(API + "product-types/" + subCatId);
+    Object.keys(res.data).forEach(key => products.push(res.data[key]));
+    return products;
+}
+
+export const createProject = async (project) => {
+    // console.log(project);
+    
+
+    const res = await axios.post(API + "projects/add-project/", project);
+    return res;
+    // const newProject = {
+    //     id: "" + usersIdeas[userId].projects.length,
+    //     ...project
+    // }
  
-    usersIdeas[userId].projects.push(newProject)
-    return { status: 200, message: "Project - successfully created!"}
+    // usersIdeas[userId].projects.push(newProject)
+    // return { status: 200, message: "Project - successfully created!"}
     
 }
 
@@ -727,10 +718,8 @@ export const addProject = async (userId, project) => {
 }
 
 export const getProjects = async (id) => {
-    const projects = [];
-    const res = await axios.get(API + "projects/getProjects/" + id);
-    Object.keys(res.data).forEach(key => projects.push(res.data[key]));
-    return projects;
+    const res = await axios.get(API + "projects/getProjects/" + id);    
+    return res.data.projects;
 }
 
 export const getCompany = (id) => {
@@ -742,12 +731,18 @@ export const fetchSearchResults = (searched) => {
     return searchResults;
 }
 
-export const fetchCategories = () => {
-    return categories;
+export const fetchCategories = async (type) => {
+    const res = await axios.get(API + "categories/" + type);
+    const cat = [];
+    Object.keys(res.data).forEach(key => cat.push(res.data[key]));   
+    return cat;
 }
 
-export const fetchSubCategories = (category) => {    
-    return subCategories[category];
+export const fetchSubCategories = async (category) => {    
+    const res = await axios.post(API + "categories/sub", {category});
+    const cat = [];
+    Object.keys(res.data).forEach(key => cat.push(res.data[key]));   
+    return cat;
 }
 
 export const fetchPlansCards = async (type) => {    

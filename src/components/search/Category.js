@@ -1,26 +1,16 @@
-/* eslint-disable no-use-before-define */
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
 export default function ComboBox(props) {
     const {handleSelected, categories, label, variant, size} = props;
-    let selectedCategory = "";
-    let disabled = false;
+    
+    let selectedCategory = useRef();
+    let disabled = false;    
 
-    if (categories === undefined && label === "Sub Category"){
+    if (categories === undefined && (label === "Sub Category" || label === "Product")){
         disabled = true;
-    }
-
-    const handleSelect = (value) => {
-        if (categories === undefined){
-            return
-        }
-        if (selectedCategory !== value.value){          
-            handleSelected(value.value);
-            selectedCategory = value.value;
-        }
     }
 
   return (
@@ -29,14 +19,25 @@ export default function ComboBox(props) {
         <Autocomplete
         id={label}
         options={categories}
-        getOptionLabel={(option) => option.title}
+        getOptionLabel={(option) => option.name}
+        onChange={(event, value) => {
+            if(value){
+                if (selectedCategory.current !== value.id){                                  
+                    handleSelected(value);
+                    selectedCategory.current = value.id;
+                }
+            }
+            
+        }}
+        getOptionSelected={(option, value) => option.id === value.id}
         style={{ minWidth: 180 }}
         disabled={disabled}
         renderInput={(params) => 
             <TextField
                 variant={variant ? variant : "standard"}
                 size={size ? size : "small"}
-                onChange={handleSelect({...params.inputProps})} {...params} label={label} 
+                {...params} 
+                label={label} 
             />
         }
         />:
@@ -49,7 +50,8 @@ export default function ComboBox(props) {
             <TextField 
                 variant={variant ? variant : "standard"}
                 size={size ? size : "small"}
-                onChange={handleSelect({...params.inputProps})} {...params} label={label} 
+                {...params} 
+                label={label}  
             />
         }
         /> 

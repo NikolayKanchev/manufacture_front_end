@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 
 import { useReduxState } from '../../utils/State';
 import { getProjects } from '../../utils/FetchData';
-import { fetchCreateProjectDesc, requestOffers, addCategory } from '../../utils/FetchData';
+import { fetchCreateProjectDesc, requestOffers } from '../../utils/FetchData';
 import history from '../../utils/History';
 
 import AddIcon from '@material-ui/icons/Add';
@@ -33,7 +33,6 @@ const Projects = () => {
         let isSubscribed = true;
 
         if(isSubscribed && logedIn){
-            // addCategory()
             getProjects(user.id).then(p => setProjects(p));
         }
         return () => { isSubscribed = false }

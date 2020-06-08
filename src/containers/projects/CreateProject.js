@@ -6,9 +6,9 @@ import {
     fetchCategories, 
     fetchSubCategories, 
     getOptions, 
-    createProject 
+    createProject,
+    fetchProductTypes
 } from '../../utils/FetchData';
-import MultipleSelect from '../../components/search/Multiple';
 import CategorySearch from '../../components/search/Category';
 
 import MuiAlert from '@material-ui/lab/Alert';
@@ -28,50 +28,51 @@ const [errDesc, setErrDesc] = useState(false);
 const [errQuantity, setErrQuantity] = useState(false);
 const [successMessage, setSuccessMessage] = useState(undefined);
 const [errorMessage, setErrorMessage] = useState(undefined);
-const [ { id } ] = useReduxState();
-// const id = "2";
+const [ { user } ] = useReduxState();
 
-const categories = fetchCategories();
-const materials =  getOptions("materials");
-const sizes =  getOptions("sizes");
 const periodOptions =  getOptions("period");
-
 const [subCategories, setSubCategories] = useState();
+const [categories, setCategories] = useState();
+const [products, setProducts] = useState();
+const [projectProducts, setProjectProducts] = useState([]);
 
 const [projectName, setProjectName] = useState("");
 const category = useRef();
 const subCategory = useRef();
-const selectedSizes = useRef([]);
-const selectedMaterials = useRef([]);
-const period = useRef("Just once");
+const selectedProductType = useRef();
 
-const handleSelectCategory = async (selected) => {
-    const data = await fetchSubCategories(selected);
+const period = useRef();
+
+useEffect( () => {
+    window.scrollTo(0, 0);
+
+    async function fetchData() {
+      const result = await fetchCategories("categories");
+      setCategories(result);
+    }
+    fetchData();
+
+},[]);
+
+const handleSelectCategory = async (cat) => {
+    const data = await fetchSubCategories(cat.id);
     setSubCategories(data);
-    category.current = selected;
+    category.current = cat;
 }
 
-const handleSelectSubCategory = (selected) => {
-    subCategory.current = selected;
+const handleSelectProduct = (prod) => {  
+  selectedProductType.current = prod;
 }
 
-const handleSelectedSizes = (selected) => {
-    selectedSizes.current = selected;
+const handleSelectSubCategory = async (subCat) => {
+    const data = await fetchProductTypes(subCat.id);
+    setProducts(data);  
+    subCategory.current = subCat;
 }
 
 const handleSelectPeriod = (selected) => {
     period.current = selected;
-    console.log(selected);
-    
 }
-
-const handleSelectedMaterials = (selected) => {
-    selectedMaterials.current = selected;    
-}
-
-useEffect(() => {
-  window.scrollTo(0, 0);
-});
 
 const displayAlertMessage = (message, type) => {
     if (type === "error"){
@@ -97,39 +98,18 @@ const handleSubmit = async(e) => {
     if (description === "") { setErrDesc(true); }
 
     if(projectName !== "" && description !== ""){      
-      if (!errPN && !errDesc){
+      if (!errPN && !errDesc && projectProducts.length > 0){
 
         const projectInfo = {
+            userId: user.id,
             name: projectName,
-            description: description,
-            category: category.current,
-            subCategory: subCategory.current,
-            materials: selectedMaterials.current.current,
-            sizes: selectedSizes.current.current,
-            quantity: quantity,
-            forPeriod: period.current,
-            offersRequested: false,
-            offersReceived: false,
-            statusMessage: "You haven't requested offers yet!",
+            desc: description,
+            productLines: projectProducts
         }
-
-        const res = await createProject(projectInfo, id);
+        const res = await createProject(projectInfo);
         if (res.status === 200){
             displayAlertMessage(res.message, "success");
         }
-        
-        // registerRequest(projectInfo)
-        // .then(res => {          
-        //   if (res.data.message === "Your registration was successful!"){
-        //     history.push('/login');
-        //   }else{
-        //     console.log(res);
-        //     displayError("Something went wrong! Try again!")
-        //   }
-        // })
-        // .catch(err => {
-        //   displayError(err.message);
-        // })
       }else{
         displayAlertMessage("Fill out all required fields!", "error");
       }
@@ -140,7 +120,6 @@ const handleSubmit = async(e) => {
 
 const handleChange = (e) => {
     const { name, value } = e.currentTarget;
-
     switch(name){
       case "projectName":
         setProjectName(value);
@@ -171,6 +150,22 @@ const handleChange = (e) => {
     }
   }
 
+  const handleAddProduct = () => {
+    if (category.current && subCategory.current && 
+        selectedProductType.current && quantity !== 0 && period.current){
+          
+          setProjectProducts([...projectProducts, 
+            { 
+              quantity,
+              howOften: period.current,
+              productTypeId: selectedProductType.current
+            }
+          ]);
+    }else{
+      // to show a message
+    }
+  }
+
   return (
     <>
     <Container component="main" maxWidth="md" className="mt-30">
@@ -184,30 +179,61 @@ const handleChange = (e) => {
         <form onSubmit={handleSubmit} noValidate  className="form create_project_form">
           <Grid container spacing={3} justify="center">
             <Grid item xs={6} sm={3}>
-            <TextField
-                autoComplete="pname"
-                error={errPN}
-                name="projectName"
-                variant="outlined"
-                required
-                fullWidth
-                id="projectName"
-                label="Project Name"
-                autoFocus
-                value={projectName}
-                onChange={handleChange}
-            />
+              <TextField
+                  autoComplete="pname"
+                  error={errPN}
+                  name="projectName"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="projectName"
+                  label="Project Name"
+                  autoFocus
+                  value={projectName}
+                  onChange={handleChange}
+              />
             </Grid>
-        </Grid>
-            
+            <Grid container spacing={3} justify="center">
+              <Grid item xs={12} sm={8} className="min-height">
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  multiline
+                  rows={4}
+                  id="description"
+                  label="Decribe your idea!"
+                  name="description"
+                  autoComplete="desc"
+                  error={errDesc}
+                  value={description}
+                  onChange={handleChange}
+                />
+              </Grid>
+            </Grid>
+        </Grid>        
+        <br></br>
+        <Typography component="h1" variant="subtitle1" className="pink">
+          Add one or multiple products, which have to be produced!
+        </Typography>
+        <br></br>
+          { projectProducts.map((p, i) => <div key={i}>
+            {p.quantity},{p.howOften.name},{p.productTypeId.categoryId}</div>
+          )}
+        <hr></hr>
+        <br></br>
+
         <Grid container spacing={3}>
-            <Grid item xs={6} sm={3}>
-                <CategorySearch size="medium" variant="outlined" handleSelected={handleSelectCategory} categories={categories} label="Category"/>
+            <Grid item xs={6} sm={4}>
+                <CategorySearch size="small" variant="outlined" handleSelected={handleSelectCategory} categories={categories} label="Category"/>
             </Grid>
-            <Grid item xs={6} sm={3}>
+            <Grid item xs={6} sm={4}>
                 <CategorySearch size="medium" variant="outlined" handleSelected={handleSelectSubCategory} categories={subCategories} label="Sub Category" />
             </Grid>
-            <Grid item xs={6} sm={3}>
+            <Grid item xs={6} sm={4}>
+                <CategorySearch size="small" variant="outlined" handleSelected={handleSelectProduct} categories={products} label="Product"/>
+            </Grid>
+            <Grid item xs={6} sm={4}>
               <TextField
                 variant="outlined"
                 required
@@ -221,33 +247,24 @@ const handleChange = (e) => {
                 onChange={handleChange}
               />
             </Grid>
-            <Grid item xs={6} sm={3}>
-                <CategorySearch size="medium" variant="outlined" handleSelected={handleSelectPeriod} categories={periodOptions} label="How often?" />
+            <Grid item xs={6} sm={4}>
+                <CategorySearch width={{width: "210px"}} size="medium" variant="outlined" handleSelected={handleSelectPeriod} categories={periodOptions} label="How often?" />
             </Grid>
-            <Grid item xs={12} sm={6}>
-                <MultipleSelect size="medium" variant="outlined" handleSelected={handleSelectedMaterials} multiOptions={materials} label="Materials" />
-            </Grid>           
-            <Grid item xs={12} sm={6}>
-                <MultipleSelect size="medium" variant="outlined" handleSelected={handleSelectedSizes} multiOptions={sizes} label="Sizes" />
+            <Grid item xs={6} sm={4}>
+                <Button
+                      fullWidth
+                      variant="outlined"
+                      color="secondary"
+                      style={{ height: "55px"}}
+                      onClick={handleAddProduct}
+                  >
+                      Save
+                </Button>
+                </Grid>
             </Grid>
-
-          <Grid item xs={12} sm={6} className="min-height">
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                multiline
-                rows={4}
-                id="description"
-                label="Decribe your idea!"
-                name="description"
-                autoComplete="desc"
-                error={errDesc}
-                value={description}
-                onChange={handleChange}
-              />
-            </Grid>
-          </Grid>
+          <br></br>
+          <hr></hr>
+          <br></br>
           <Grid container spacing={2} justify="center">
             <Grid item xs={6} sm={3}>
                 <Button

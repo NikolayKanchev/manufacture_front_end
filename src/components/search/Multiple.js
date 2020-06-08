@@ -4,18 +4,18 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import './Search.css'
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: 500,
-    '& > * + *': {
-      marginTop: theme.spacing(3),
-    },
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     width: "100%",
+//     '& > * + *': {
+//       marginTop: theme.spacing(3),
+//     },
+//   },
+// }));
 
 export default function Tags(props) {
-  const {handleSelected, multiOptions, label, variant, size} = props;
-  const classes = useStyles();
+  const {handleSelected, multiOptions, label, variant, size, width} = props;
+  // const classes = useStyles();
   const chosenOptions = useRef([]);
 
   const handleChangeMultiple = (obj) => {
@@ -41,10 +41,12 @@ export default function Tags(props) {
   };
 
   return (
-    <div className={classes.root}>
-      <Autocomplete
+    // <div className={classes.root}>
+    <div>
+    <Autocomplete
         multiple
         id={label}
+        style={width}
         options={multiOptions}
         getOptionLabel={(option) => option.title}
         filterSelectedOptions
