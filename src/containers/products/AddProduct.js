@@ -151,17 +151,10 @@ const handleSubmit = async(e) => {
             materials: selectedMaterials.current.current,
             sizes: selectedSizes.current.current,
             colors: selectedColors.current.current,
-            // category: category.current,
-            // subCategory: subCategory.current,
         }
 
         addProduct(productData, '1', '0', id);
         history.push('/products');
-
-        // const res = await createProject(productData, id);
-        // if (res.status === 200){
-        //     displayAlertMessage(res.message, "success");
-        // }
       }else{
         displayAlertMessage("Fill out all required fields!", "error");
       }

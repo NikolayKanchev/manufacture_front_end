@@ -680,19 +680,13 @@ export const  fetchProductTypes = async (subCatId) => {
 }
 
 export const createProject = async (project) => {
-    // console.log(project);
-    
-
     const res = await axios.post(API + "projects/add-project/", project);
     return res;
-    // const newProject = {
-    //     id: "" + usersIdeas[userId].projects.length,
-    //     ...project
-    // }
- 
-    // usersIdeas[userId].projects.push(newProject)
-    // return { status: 200, message: "Project - successfully created!"}
-    
+}
+
+export const editProject = async (project) => {
+    const res = await axios.post(API + "projects/edit-project/", project);
+    return res;
 }
 
 export const getOptions = (type) => {
@@ -703,8 +697,9 @@ export const getOffers = (projectId) => {
     return projectOffers["0"].offers;
 }
 
-export const getProject = (projectId, userId) => {
-    return usersIdeas[userId].projects[projectId];
+export const getProject = async (id) => {
+    const res = await axios.get(API + "projects/get-by-id/" + id );
+    return res;
 }
 
 export const addCategory = async (category) => {
@@ -752,6 +747,12 @@ export const fetchPlansCards = async (type) => {
     return cards;
 }
 
+// export const getProject = async (id) => {    
+//     const res = await axios.get(API + "projects/getById" + id );
+//     console.log(res);
+//     return res;
+// }
+
 export const fetchHomeInfoCards = (isManufacturer) => {
     if (isManufacturer){
         return manHomeInfoCards;
@@ -790,6 +791,16 @@ export const loginRequest = async (email, password) => {
     return res;
 }
 
+export const deleteProject = async (id) => {
+    const res = await axios.delete("http://localhost:4000/projects/delete/" + id);
+    // const res = await axios.delete("http://localhost:4000/projects/delete" + id, authorization(token));
+    return res;
+}
+
+export const deleteProductLine = async (id) => {
+    const res = await axios.delete("http://localhost:4000/projects/product-line/delete/" + id);
+    return res;
+}
 
 // export const fetchChildren = async (token: string) => {
 //     const res = await axios.get("http://localhost:4000/children", authorization(token));

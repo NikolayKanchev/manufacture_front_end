@@ -28,6 +28,7 @@ import CreateProject from './containers/projects/CreateProject';
 import FindProjects from './containers/projects/FindProjects';
 import Products from './containers/products/Products';
 import AddProduct from './containers/products/AddProduct';
+import EditProject from './containers/projects/EditProject';
 
 import history from './utils/History';
 import './App.css';
@@ -69,6 +70,7 @@ class App extends Component {
                     <Route path="/find-projects" component={FindProjects} exact/>
                     <Route path="/products" component={Products} exact/>
                     <Route path="/add-product" component={AddProduct} exact/>
+                    <Route path="/edit-project/:projectId" component={EditProject} exact/>
 
                     {/* /create-project */}
                 </Switch>
