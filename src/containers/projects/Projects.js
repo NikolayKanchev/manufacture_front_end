@@ -25,35 +25,41 @@ const useStyles = makeStyles((theme) =>
 
 const Projects = () => {
     const [projects, setProjects] = useState();
-    const [ {user, logedIn} ] = useReduxState();
+    const [ {user, logedIn, isManufacturer} ] = useReduxState();
     const classes = useStyles();
     const card = fetchCreateProjectDesc();
 
     useEffect(() => {
-        window.scrollTo(0, 0);
-
-        if(logedIn){            
-            getProjects(user.id).then(p => setProjects(p));
+        window.scrollTo(0, 0);        
+        if(logedIn){
+            if(isManufacturer){
+                getProjects("all").then(p => setProjects(p));                
+            }else{
+                getProjects(user.id).then(p => setProjects(p));
+            }
         }
     },[logedIn, user]); 
 
-      const handleRequestOffers = async (e, projectId) => {
-          e.preventDefault();
-          
-          const res = await requestOffers(projectId, user.id);
-          if (res.status === 200){
-                const newProjects = [...projects];
-                newProjects[projectId] = res.project;
-                setProjects(newProjects);
-          }
-      }
-
-    const handleEdit = () => {
-
+    const handleRequestOffers = async (e, projectId) => {
+        e.preventDefault();
+        
+        const res = await requestOffers(projectId, user.id);
+        if (res.status === 200){
+            const newProjects = [...projects];
+            newProjects[projectId] = res.project;
+            setProjects(newProjects);
+        }
     }
 
+    const handleSendOffer = async (e, projectId) => {
+        history.push("/send-offer/" + projectId);
+    }
+
+    // const handleEdit = () => {
+
+    // }
+
     const handleDelete = async (id) => {
-            
         const res = await deleteProductLine(id);
         if(res.status = 200){
             getProjects(user.id).then(p => setProjects(p));
@@ -62,12 +68,11 @@ const Projects = () => {
     
     return(
         <>
-        {/* {!logedIn ?  */}
         {logedIn ? 
             <>
             {projects ? 
                 <>
-                    <div className="title">Your Projects</div>
+                    <div className="title">{ isManufacturer ? "Find Project" : "Your Projects" }</div>
                     <div className="ideas-flex">
                         <div className="ideas-main">
                             {projects.map(p => 
@@ -75,9 +80,11 @@ const Projects = () => {
                                     <Card className="card-idea">
                                         <div className="small-title blue p-small-title">{p.name}</div>
                                         <div className="edit-icon">
-                                            <Fab size="small" color="default" aria-label="edit" className={classes.fab}>
-                                                <EditIcon onClick={() => history.push('edit-project/' + p.id)}/> 
-                                            </Fab>
+                                            { isManufacturer ? null : 
+                                                <Fab size="small" color="default" aria-label="edit" className={classes.fab}>
+                                                    <EditIcon onClick={() => history.push('edit-project/' + p.id)}/> 
+                                                </Fab>
+                                            }
                                         </div>
                                         
                                         <div>
@@ -110,9 +117,11 @@ const Projects = () => {
                                                                         <div className="product-title">Description</div>
                                                                         <span className="small-italic">{line.type.desc}</span>
                                                                     </div>
-                                                                    <div className="delete-icon">
-                                                                        <DeleteIcon onClick={() => handleDelete(line.id)}/> 
-                                                                    </div>
+                                                                    { isManufacturer ? null : 
+                                                                        <div className="delete-icon">
+                                                                            <DeleteIcon onClick={() => handleDelete(line.id)}/> 
+                                                                        </div>
+                                                                    }
                                                                     
                                                                 </div>
                                                             </div>
@@ -125,7 +134,10 @@ const Projects = () => {
                                         { !p.offersRequested ? 
                                             <>
                                                 <br></br>
-                                                <div><Button variant="outlined" color="secondary" onClick={(e) => handleRequestOffers(e, p.id)}>Request Offers</Button></div>
+                                                {isManufacturer ? 
+                                                    <div><Button variant="outlined" color="secondary" onClick={(e) => handleSendOffer(e, p.id)}>Send an Offer</Button></div> :
+                                                    <div><Button variant="outlined" color="secondary" onClick={(e) => handleRequestOffers(e, p.id)}>Request Offers</Button></div>
+                                                }
                                             </>:null
                                         }
                                         <br></br>
@@ -143,21 +155,29 @@ const Projects = () => {
                 <>
                     <div className="ideas-flex">
                         <div className="no-ideas-cont">
-                            <div className="title">You don't have any projects yet!</div>
-                            <div className="no-ideas-btn"><Button variant="outlined" color="primary" onClick={() => history.push("/create-project")}>Create Project</Button></div>
+                            { isManufacturer ? <>
+                                <div className="title">No projects found!</div>
+                            </>: <>
+                                <div className="title">You don't have any projects yet!</div>
+                                <div className="no-ideas-btn"><Button variant="outlined" color="primary" onClick={() => history.push("/create-project")}>Create Project</Button></div>
+                            </>}
                         </div>
                     </div>
-                    <div className="ideas-flex">
-                        <div>
-                            <div className="title pink">How does it work?</div>
-                            <div className="small-italic blue">See down below!</div>
-                        </div>
-                    </div>
-                    <div className="ideas-flex">
-                        <div className="no-ideas-info">
-                            <CardsList cards={[card]} type="row"/>   
-                        </div>
-                    </div>
+                    { isManufacturer ? null : 
+                        <>
+                            <div className="ideas-flex">
+                                <div>
+                                    <div className="title pink">How does it work?</div>
+                                    <div className="small-italic blue">See down below!</div>
+                                </div>
+                            </div>
+                            <div className="ideas-flex">
+                                <div className="no-ideas-info">
+                                    <CardsList cards={[card]} type="row"/>   
+                                </div>
+                            </div>
+                        </>
+                    }
                 </>
             }
             </>:

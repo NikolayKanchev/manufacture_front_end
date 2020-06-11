@@ -20,7 +20,7 @@ const SeeOffers = ({match}) => {
 
         async function fetchData() {
             const result = await getOffers(projectId);
-            const result2 = await getProject(projectId, id);
+            const result2 = await getProject(projectId);
             setOffers(result);
             setProject(result2);
         }

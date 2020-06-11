@@ -2,12 +2,13 @@ import React, { useReducer, useContext } from 'react';
 
 export const initialState = {
     userType: "",
-    logedIn: false,
+    logedIn: true,
     username: "",
     token: "",
-    isManufacturer: false,
+    isManufacturer: true,
     company: undefined,
-    user: undefined,
+    // user: undefined,
+    user: {id: 1},
     categorySelected: false,
     manufacturerPlan: "",
     endUserPlan: "",

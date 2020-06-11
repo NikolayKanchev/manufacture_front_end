@@ -17,10 +17,16 @@ const validateQuantity = (i) => {
     return Number.isInteger(i);
 }
 
+const validatePrice = (number) => {
+    var re = /^\d{0,10}(?:\.\d{0,2}){0,1}$/;
+    return re.test(number);
+}
+
 export {
     validateEmail,
     validatePass,
     validateName,
-    validateQuantity
+    validateQuantity,
+    validatePrice
 }
 

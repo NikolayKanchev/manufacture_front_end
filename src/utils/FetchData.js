@@ -712,6 +712,11 @@ export const addProject = async (userId, project) => {
     return res;
 }
 
+export const sendOffer = async (offer) => {    
+    const res = await axios.post(API + "offers/send-offer", { offer });
+    return res;
+}
+
 export const getProjects = async (id) => {
     const res = await axios.get(API + "projects/getProjects/" + id);    
     return res.data.projects;
