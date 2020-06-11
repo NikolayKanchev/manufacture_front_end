@@ -596,26 +596,6 @@ const projectOffers = [
 ]
 
 const options = {
-    materials: [
-      { id: 0, name: 'Plastic' },
-      { id: 1, name: 'Metal' },
-      { id: 2, name: 'Iron' },
-      { id: 3, name: 'Textil' },
-    ],
-    sizes: [
-        { id: 0, name: 'small' },
-        { id: 1, name: 'medium' },
-        { id: 2, name: 'large' },
-        { id: 3, name: 'xl' },
-        { id: 4, name: 'xxl' },
-        { id: 5, name: 'xxxl' },
-        { id: 6, name: '1 kg' },
-        { id: 7, name: '2 kg' },
-        { id: 8, name: '3 kg' },
-        { id: 9, name: '1 l' },
-        { id: 10, name: '2 l' },
-        { id: 11, name: '3 l' },
-      ],
     period: [
         { id: 0, name: 'Just once' },
         { id: 1, name: 'Every week' },
@@ -626,44 +606,31 @@ const options = {
         { id: 6, name: 'Every year' },
         { id: 7, name: 'None of the options' },
       ],
-      colors: [
-        { id: 0, title: 'Red' },
-        { id: 1, title: 'Green' },
-        { id: 2, title: 'Yellow' },
-        { id: 3, title: 'Orange' },
-        { id: 4, title: 'Black' },
-        { id: 5, title: 'White' },
-        { id: 6, title: 'Blue' },
-        { id: 7, title: 'Pink' },
-        { id: 5, title: 'Grey' },
-        { id: 6, title: 'Purple' },
-        { id: 7, title: 'Cian' },
-      ],
       productType: [
-        { id: 0, title: 'pcs' },
-        { id: 1, title: 'boxes' },
-        { id: 2, title: 'containers' },
-        { id: 3, title: 'liters' },
-        { id: 4, title: 'packages' },
-        { id: 5, title: 'units' },
-        { id: 6, title: 'sets' },
-        { id: 7, title: 'pairs' }
+        { id: 0, name: 'pcs' },
+        { id: 1, name: 'boxes' },
+        { id: 2, name: 'containers' },
+        { id: 3, name: 'liters' },
+        { id: 4, name: 'packages' },
+        { id: 5, name: 'units' },
+        { id: 6, name: 'sets' },
+        { id: 7, name: 'pairs' }
       ],
       capacityPeriod: [
-        { id: 0, title: 'Daily' },
-        { id: 1, title: 'Weekly' },
-        { id: 2, title: 'Monthly' },
-        { id: 3, title: 'Early' },
+        { id: 0, name: 'Daily' },
+        { id: 1, name: 'Weekly' },
+        { id: 2, name: 'Monthly' },
+        { id: 3, name: 'Yearly' },
       ],
 }
 
 const API = "http://localhost:4000/";
 
-export const addProduct = (product, category, subCategory, companyID) => {
+// export const addProduct = (product, category, subCategory, companyID) => {
     // console.log(product, category, subCategory, companyID);
     
     // return searchResults[companyID].categories[category].subCategories[subCategory].products.push(product);
-}
+// }
 
 export const requestOffers = (projectId, userId) => {
     const project = usersIdeas[userId].projects[projectId];
@@ -717,9 +684,19 @@ export const sendOffer = async (offer) => {
     return res;
 }
 
+export const addProduct = async (product) => {    
+    const res = await axios.post(API + "products/addOne", { product });
+    return res;
+}
+
 export const getProjects = async (id) => {
     const res = await axios.get(API + "projects/getProjects/" + id);    
     return res.data.projects;
+}
+
+export const getProducts = async (id) => {
+    const res = await axios.get(API + "products/man-products/" + id);    
+    return res.data.products;
 }
 
 export const getCompany = (id) => {
