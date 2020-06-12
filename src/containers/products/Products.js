@@ -42,7 +42,7 @@ const Products = () => {
     const [errPN, setErrPN] = useState(false);
     const [errDesc, setErrDesc] = useState(false);
     const [errCapacity, setErrCapacity] = useState(false);
-    const [errMinOrder, setErrMinOrder] = useState(0);
+    const [errMinOrder, setErrMinOrder] = useState(false);
 
     const period = useRef();
     const category = useRef();
@@ -107,8 +107,8 @@ const Products = () => {
 
             const res = await addProduct(productDetails);
             if (res.status === 200){
-                console.log("OOOOOOO");
-                // history.goBack();
+                const result2 = await getProducts(user.id);
+                setProducts(result2);
                 // displayAlertMessage(res.message, "success");
             }
           }else{
@@ -190,22 +190,22 @@ const Products = () => {
                 </div>
                 { products.map((p, i) => 
                     <div key={i} className="products-cont">
-                        <div key={p.product.id} className="prod-sub-cont">
+                        <div key={p.id} className="prod-sub-cont">
                             <Grid container spacing={1}>
                                 <Grid item xs={6} sm={2}>
-                                    {p.product.type.name}
+                                    {p.type.name}
                                 </Grid>
                                 <Grid item xs={6} sm={4}>
-                                    <span className="p-desc">{p.product.type.desc}</span>
+                                    <span className="p-desc">{p.type.desc}</span>
                                 </Grid>
                                 <Grid item xs={6} sm={2}>
-                                    {p.product.capacity}/{p.product.unitType}
+                                    {p.capacity}/{p.unitType}
                                 </Grid>
                                 <Grid item xs={6} sm={2}>
-                                    {p.product.capacityPeriod}
+                                    {p.capacityPeriod}
                                 </Grid>
                                 <Grid item xs={6} sm={2}>
-                                    {p.product.minOrder}
+                                    {p.minOrder}
                                 </Grid>
                             </Grid>
                         </div>

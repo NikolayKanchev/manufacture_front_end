@@ -710,8 +710,8 @@ export const fetchSearchResults = (searched) => {
 
 export const fetchCategories = async (type) => {
     const res = await axios.get(API + "categories/" + type);
-    const cat = [];
-    Object.keys(res.data).forEach(key => cat.push(res.data[key]));   
+    const cat = [];    
+    Object.keys(res.data).forEach(key => cat.push(res.data[key]));
     return cat;
 }
 
